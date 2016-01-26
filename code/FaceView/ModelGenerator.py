@@ -3,6 +3,9 @@ import os
 import shutil
 
 #Gets a list of MakeHuman model features
+#Don't call this often, as it requires us 
+#	to spin up MakeHuman and load the targets
+#Instead call it once and store the results
 def getFeatureList():
 	f = open(os.devnull, 'w')
 	child = subprocess.Popen(["python", "ModelGenerator.py", "-l"], stdin=None, stdout=subprocess.PIPE, stderr=open(os.devnull, 'w'), shell=False, universal_newlines=True)
@@ -12,9 +15,18 @@ def getFeatureList():
 	l = filter(None, l)
 	f.close()
 	return l
+
+def generateModelParams(dataList, orgFeatureMapping):
+	retval = ""
+	for sample in dataList:
+		retval += ("BEGIN MODEL\n")
+		paramList = sample.toParamList(orgFeatureMapping)
+		retval += ("\n".join(paramList) + '\n')
+		retval += ("END MODEL\n")
+	return retval
 	
-#Generate models from normalized data
-def generateModels(dataList):
+#Generate models from normalized [0..1] data
+def generateModels(dataList, orgFeatureMapping):
 
 	if os.path.exists("../models"):
 		shutil.rmtree("../models")
@@ -22,12 +34,7 @@ def generateModels(dataList):
 	f = open(os.devnull, 'w')
 	child = subprocess.Popen(["python", "ModelGenerator.py"], stdin=subprocess.PIPE, stdout=None, stderr=None, shell=False, universal_newlines=True)
 	
-	message = ""
-	for sample in dataList:
-		message += ("BEGIN MODEL\n")
-		paramList = sample.toParamList()
-		message += ("\n".join(paramList) + '\n')
-		message += ("END MODEL\n")
+	message = generateModelParams(dataList, orgFeatureMapping)
 	child.communicate(message)
 	child.wait()
 	f.close()
@@ -180,8 +187,13 @@ if __name__ == '__main__':
 			if components[0] == 'name':
 				params[components[0]] = components[1]
 			else:
-				params[components[0]] = float(components[1])			
-		
+				val = float(components[1])	
+				#if normalization gets out of whack, fix it.
+				if val > 1:
+					val = 1
+				elif val < 0:
+					val = 0
+				params[components[0]] = val
 		sys.stdout = stdout
 		import mh2obj
 		ObjConfig = __import__('9_export_obj').ObjConfig
