@@ -95,8 +95,14 @@
       <height>21</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
     <property name="text">
      <string>Absolute: Normalize based on the largest population of all samples</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QRadioButton" name="norm2">
@@ -151,55 +157,6 @@
      </rect>
     </property>
    </widget>
-   <widget class="QScrollArea" name="scrollArea">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>160</y>
-      <width>531</width>
-      <height>611</height>
-     </rect>
-    </property>
-    <property name="widgetResizable">
-     <bool>true</bool>
-    </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>529</width>
-       <height>609</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>140</y>
-      <width>71</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Organism</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>140</y>
-      <width>47</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Feature</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="Generate">
     <property name="geometry">
      <rect>
@@ -213,7 +170,7 @@
      <string>Generate</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="SelectGroupFile_3">
+   <widget class="QPushButton" name="Cancel">
     <property name="geometry">
      <rect>
       <x>590</x>
@@ -225,6 +182,29 @@
     <property name="text">
      <string>Cancel</string>
     </property>
+   </widget>
+   <widget class="QTableWidget" name="table">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>110</y>
+      <width>541</width>
+      <height>661</height>
+     </rect>
+    </property>
+    <property name="sortingEnabled">
+     <bool>false</bool>
+    </property>
+    <column>
+     <property name="text">
+      <string>Organism</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Feature</string>
+     </property>
+    </column>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
