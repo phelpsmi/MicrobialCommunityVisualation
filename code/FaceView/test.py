@@ -16,6 +16,7 @@ assert badSample is None
 assert len(samples) > 0
 
 featureList = modelGenerator.getFeatureList()
+print len(featureList)
 critterList = samples[0].getOrgList()
 mapping = {}
 for i in range(0, len(critterList)):
