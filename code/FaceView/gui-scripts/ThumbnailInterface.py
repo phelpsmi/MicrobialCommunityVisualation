@@ -7,7 +7,7 @@ from PyQt4 import QtGui, uic, QtCore
 import sys
 
 # replace 'c:/test.ui' with real path to ui-file created in QtDesigner
-uifile = '../QtCreator/FaceView/thumbnailview.ui'
+uifile = './thumbnailview.ui'
 form, base = uic.loadUiType(uifile)
 
 class thumbnailWindow(QtGui.QMainWindow):
