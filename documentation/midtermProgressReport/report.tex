@@ -116,7 +116,7 @@ There is currently little work done with grouping. The parser will eventually be
 
 The most difficult problem that Thomas faced was simply trying to read and decypher the MakeHuman code enough to write the wrapper. Since Python is loosely typed, he couldn't just match the types to see how things were being used. Instead (at least at first), he had to walk through the code jumping from function definition to function definition, searching through multiple files. After doing that for a few hours, he remembered that python objects have a dictionary of their attributes, so he was able to import MakeHuman modules and examine the the contents of objects returned from functions. This sped up the process considerably. Additionally, he figured out how to use grep-like functionality from within PowerShell, which made it much easier to look for function definitions.
 
-Here, Michael will describe his most difficult problem thus far.
+For Michael, the most difficult problem has been figuring out how to display the obj files within the Qt based interface. There is surprisingly little documentation on how to perform such a task. Currently, this is has still not been determined as far as how we will actually do it. We may end up needing to use an alternative strategy if we are unable to render the files natively within the Qt interface. This may require spawning instances of the windows obj viewer or Thomas' custom viewer which could potentially be relatively resource heavy.
 
 \section*{Interesting Code}
 
