@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (preloaded format=pdflatex 2016.2.8)  10 FEB 2016 00:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (preloaded format=pdflatex 2016.2.8)  12 FEB 2016 14:49
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -751,25 +751,25 @@ LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10> not available
 (Font)              Font shape `OT1/pcr/b/n' tried instead on input line 2.
 LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
 (Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 4.
- [5]) [6] (./report.aux) ) 
+ [5]) [6] [7] (./report.aux) ) 
 Here is how much of TeX's memory you used:
  14502 strings out of 493042
  249723 string characters out of 6138228
- 371410 words of memory out of 5000000
+ 371412 words of memory out of 5000000
  17780 multiletter control sequences out of 15000+600000
  40991 words of font info for 90 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,8n,40p,1037b,350s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.e
-nc}<c:/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/te
-xlive/2015/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb><c:/texlive/2015/texmf
--dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2015/texmf-dist/fonts/type
-1/urw/courier/ucrro8a.pfb><c:/texlive/2015/texmf-dist/fonts/type1/urw/times/utm
-r8a.pfb><c:/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (6 pages, 172123 bytes).
+ 37i,8n,40p,1037b,346s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2015/texmf-dist/fonts/enc/dvips/base/
+8r.enc}<c:/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c
+:/texlive/2015/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb><c:/texlive/2015/t
+exmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2015/texmf-dist/fonts/
+type1/urw/courier/ucrro8a.pfb><c:/texlive/2015/texmf-dist/fonts/type1/urw/times
+/utmr8a.pfb><c:/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on report.pdf (7 pages, 172938 bytes).
 PDF statistics:
- 55 PDF objects out of 1000 (max. 8388607)
- 34 compressed objects within 1 object stream
+ 60 PDF objects out of 1000 (max. 8388607)
+ 38 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
