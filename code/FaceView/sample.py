@@ -4,6 +4,9 @@ class Sample(dict):
 		dict.__init__(self)
 		self.name = name
 		
+	def __str__(self):
+		return "<Sample Name: " + self.name + ">"  
+		
 	def toParamList(self, orgFeatureMapping):
 		retval = ['name:' + self.name]
 		for critter, pop in self.iteritems():
@@ -17,8 +20,11 @@ class Sample(dict):
 			self[org] = pop
 			
 	def getOrgList(self):
-		return self.keys()
+		return list(self.keys())
 		
 	def getName(self):
-		return self.name
+		return str(self.name)
+		
+	def __hash__(self):
+		return self.name.__hash__()
 	

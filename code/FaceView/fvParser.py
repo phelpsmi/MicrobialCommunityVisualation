@@ -2,8 +2,9 @@ import os
 
 #minimum functions required for a parser.
 #Should also register itself with the parser registry
+#Returns list of samples and a list of groups
 class minParser:
-	def parseFile(self, filePath):
+	def parseFile(self, filePath, metaPath):
 		"noop"
 
 #The parser registry
@@ -23,11 +24,11 @@ class parserRegistry:
 	def extensionIsSupported(self, extension):
 		return self.mapping.has_key(extension)
 		
-	def parse(self, filePath):
+	def parse(self, filePath, metaPath):
 		fileExt = os.path.splitext(os.path.normpath(filePath))[1]
 		parser = self.getParserForExtension(fileExt)
 		if parser is not None:
-			return parser().parseFile(filePath)
+			return parser().parseFile(filePath, metaPath)
 		else:
 			return None
 	
