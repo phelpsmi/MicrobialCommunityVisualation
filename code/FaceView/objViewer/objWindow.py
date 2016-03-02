@@ -9,6 +9,9 @@ import math
 
 from ctypes import c_void_p
 
+#By Thomas Albertine
+#It should allow you to view obj files in a little window in your app.
+
 def genTranslationMatrix(x, y, z):
 	return numpy.matrix([
 		[1, 0, 0, x],

@@ -1,4 +1,6 @@
 #version 330 core
+//By Thomas Albertine
+//Just Phong illumination
 in vec4 uModelPos;
 in vec2 uST;
 in vec3 uModelNormal;

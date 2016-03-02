@@ -1,4 +1,6 @@
 #version 330 core
+//By Thomas Albertine
+//Does transformations and passes through enough information for Phong illumination.
 in vec2 vST;
 in vec3 vNormalModel;
 in vec3 vNormalCamera;
