@@ -218,10 +218,6 @@ class ObjWidget(QGLWidget):
 			data = numpy.array(self.data.skinSpecColor(), dtype='float32')
 			GL.glUniform4fv(loc, 1, data)
 		
-		#Next line only for array buffers
-		#GL.glDrawArrays(GL.GL_TRIANGLES, 
-		#	0, #Starting offset
-		#	3) #Count
 		GL.glBindBuffer(GL.GL_ELEMENT_ARRAY_BUFFER, self.indexBuffer)
 		GL.glDrawElements(GL.GL_TRIANGLES, #Topology
 			numpy.array(self.data.indices(), 'uint32').size, #Count in points
@@ -265,10 +261,6 @@ class ObjWidget(QGLWidget):
 		self.vao = GL.glGenVertexArrays(1)
 		GL.glBindVertexArray(self.vao)
 		
-		#Test data. Left here for debugging purposes later
-		#vertices = numpy.array([-1.0, -1.0, -0.5, 1.0, 
-		#	1.0, -1.0, -0.5, 1.0,
-		#	0.0,  1.0, -0.5, 1.0], dtype='f')
 		totalSize = 0
 		for i in self.attrs:
 			data = i[3]
@@ -293,7 +285,6 @@ class ObjWidget(QGLWidget):
 			offset += size
 		
 		#Generate index buffer
-		#indices = numpy.array([0, 1, 2], dtype='uint32
 		indices = numpy.array(self.data.indices(), dtype='uint32')
 		self.indexBuffer = GL.glGenBuffers(1)
 		GL.glBindBuffer(GL.GL_ELEMENT_ARRAY_BUFFER, self.indexBuffer)
@@ -350,7 +341,6 @@ class ObjWidget(QGLWidget):
 				
 if __name__ == '__main__':
 	import objModel
-	#model = objModel.ObjModel('../models/PC.354.obj')
 	model = objModel.ObjModel('../../models/PC.354.obj')
 	app = QtGui.QApplication(["Thomas' "])
 	widget = ObjWidget(model)
