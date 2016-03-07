@@ -9,7 +9,7 @@ import sys
 import main as parent
 import fvParser
 import otuParser
-import ModelGenerator
+import modelGenerator as ModelGenerator
 import modelGeneratorTranslator
 
 import ThumbnailInterface

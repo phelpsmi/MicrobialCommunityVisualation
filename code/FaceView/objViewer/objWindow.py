@@ -188,6 +188,10 @@ class ObjWidget(QGLWidget):
 		
 	def paintGL(self):
 		#For a test
+		if self.highlighted:
+			GL.glClearColor(0.0, 0.5, 0.0, 1.0)
+		else:
+			GL.glClearColor(0.2, 0.2, 0.8, 1.0)
 		GL.glDisable(GL.GL_CULL_FACE)
 		GL.glClear(GL.GL_DEPTH_BUFFER_BIT | GL.GL_COLOR_BUFFER_BIT)
 		
@@ -245,10 +249,6 @@ class ObjWidget(QGLWidget):
 
 	def initializeGL(self):
 		QGLWidget.initializeGL(self)
-		if self.highlighted:
-			GL.glClearColor(0.0, 0.5, 0.0, 1.0)
-		else:
-			GL.glClearColor(0.2, 0.2, 0.8, 1.0)
 		GL.glEnable(GL.GL_DEPTH_TEST)
 		
 		
@@ -256,7 +256,7 @@ class ObjWidget(QGLWidget):
 			('uST', GL.GL_FLOAT, 2, numpy.array(self.data.texCoords(), dtype='float32')),
 			('uModelNormal', GL.GL_FLOAT, 3, numpy.array(self.data.normals(), dtype='float32'))] #name, gl type, vector length, data
 			
-		self.loadShaders('./objViewer/vert.glsl', './objViewer/frag.glsl')
+		self.loadShaders('./vert.glsl', './frag.glsl')
 		self.loadData()
 		
 	def unloadData(self):
@@ -355,8 +355,7 @@ class ObjWidget(QGLWidget):
 if __name__ == '__main__':
 	import objModel
 	import os
-	os.chdir('..')
-	model = objModel.ObjModel('../models/Sample 1.obj')
+	model = objModel.ObjModel('../../models/PC.354.obj')
 	app = QtGui.QApplication(["Thomas' "])
 	widget = ObjWidget(model)
 	widget.resize(300, 300)
