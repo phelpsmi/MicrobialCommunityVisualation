@@ -96,7 +96,7 @@ def genPerspective(vFov, aspect, near, far):
 class ObjWidget(QGLWidget):
 	# Any default values should be stored in the class
 
-	def __init__(self, model, parent=None, aspectRatio=1.0):
+	def __init__(self, model, highlighted = False, parent=None, aspectRatio=1.0):
 		QGLWidget.__init__(self, parent)
 		self.data = model
 		self.vao = None
@@ -121,7 +121,16 @@ class ObjWidget(QGLWidget):
 		self.worldToCamera = None
 		self.modelNormalToCamera = None
 		self.updateMatrices()
+
+		self.highlighted = highlighted
+
 		
+
+		
+
+	def highlight(self):
+		print "hello"
+
 	def pan(self, y):
 		'Allows the user to pan vertically around the model'
 		self.yPan = max(min(y, self.MODEL_HEIGHT * 0.8), -self.MODEL_HEIGHT * 0.92)
@@ -181,6 +190,7 @@ class ObjWidget(QGLWidget):
 		#For a test
 		GL.glDisable(GL.GL_CULL_FACE)
 		GL.glClear(GL.GL_DEPTH_BUFFER_BIT | GL.GL_COLOR_BUFFER_BIT)
+		
 		GL.glUseProgram(self.shaderProg)
 		
 		GL.glBindBuffer(GL.GL_ARRAY_BUFFER, self.vertexComps)
@@ -197,16 +207,16 @@ class ObjWidget(QGLWidget):
 		#Matrices
 		loc = GL.glGetUniformLocation(self.shaderProg, 'uModelWorld')
 		if loc > -1:
-			GL.glUniformMatrix4fv(loc, 1, GL.GL_TRUE, self.modelToWorld)
+			GL.glUniformMatrix4fv(loc, 1, GL.GL_TRUE, numpy.array(self.modelToWorld))
 		loc = GL.glGetUniformLocation(self.shaderProg, 'uWorldCamera')
 		if loc > -1:
-			GL.glUniformMatrix4fv(loc, 1, GL.GL_TRUE, self.worldToCamera)
+			GL.glUniformMatrix4fv(loc, 1, GL.GL_TRUE, numpy.array(self.worldToCamera))
 		loc = GL.glGetUniformLocation(self.shaderProg, 'uCameraProjection')
 		if loc > -1:
-			GL.glUniformMatrix4fv(loc, 1, GL.GL_TRUE, self.perspective)
+			GL.glUniformMatrix4fv(loc, 1, GL.GL_TRUE, numpy.array(self.perspective))
 		loc = GL.glGetUniformLocation(self.shaderProg, 'uModelNormalCamera')
 		if loc > -1:
-			GL.glUniformMatrix3fv(loc, 1, GL.GL_TRUE, self.modelNormalToCamera)
+			GL.glUniformMatrix3fv(loc, 1, GL.GL_TRUE, numpy.array(self.modelNormalToCamera))
 			
 		#Colors
 		loc = GL.glGetUniformLocation(self.shaderProg, 'skinColor')
@@ -235,7 +245,10 @@ class ObjWidget(QGLWidget):
 
 	def initializeGL(self):
 		QGLWidget.initializeGL(self)
-		GL.glClearColor(0.0, 0.0, 0.0, 1.0)
+		if self.highlighted:
+			GL.glClearColor(0.0, 0.5, 0.0, 1.0)
+		else:
+			GL.glClearColor(0.2, 0.2, 0.8, 1.0)
 		GL.glEnable(GL.GL_DEPTH_TEST)
 		
 		
@@ -243,7 +256,7 @@ class ObjWidget(QGLWidget):
 			('uST', GL.GL_FLOAT, 2, numpy.array(self.data.texCoords(), dtype='float32')),
 			('uModelNormal', GL.GL_FLOAT, 3, numpy.array(self.data.normals(), dtype='float32'))] #name, gl type, vector length, data
 			
-		self.loadShaders('./vert.glsl', './frag.glsl')
+		self.loadShaders('./objViewer/vert.glsl', './objViewer/frag.glsl')
 		self.loadData()
 		
 	def unloadData(self):
@@ -341,14 +354,17 @@ class ObjWidget(QGLWidget):
 				
 if __name__ == '__main__':
 	import objModel
-	model = objModel.ObjModel('../../models/PC.354.obj')
+	import os
+	os.chdir('..')
+	model = objModel.ObjModel('../models/Sample 1.obj')
 	app = QtGui.QApplication(["Thomas' "])
 	widget = ObjWidget(model)
-	widget.resize(400, 400)
+	widget.resize(300, 300)
+	widget.highlight()
 	widget.show()
 	timer = QtCore.QTimer()
 	def timeout_func():
-		widget.relativeRotate(0, 1.25)
+		widget.relativeRotate(0, 0)
 	
 	timer.timeout.connect(timeout_func)
 	timer.start(16)

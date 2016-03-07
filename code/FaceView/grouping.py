@@ -35,7 +35,7 @@ class Group:
 		self.samples |= set(samples)
 	
 	def remSamples(self, samples=[]):
-		self.samples -= set(samples=[])
+		self.samples -= set(samples)
 
 	def getSamples(self):
 		return list(self.samples)

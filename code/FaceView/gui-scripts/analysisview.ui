@@ -14,30 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QScrollArea" name="scrollArea">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>641</width>
-      <height>600</height>
-     </rect>
-    </property>
-    <property name="widgetResizable">
-     <bool>true</bool>
-    </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>639</width>
-       <height>598</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QPushButton" name="CreateGroup">
+   <widget class="QPushButton" name="FrontView">
     <property name="geometry">
      <rect>
       <x>700</x>
@@ -50,7 +27,7 @@
      <string>Front View</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="CreateGroup_2">
+   <widget class="QPushButton" name="SideView">
     <property name="geometry">
      <rect>
       <x>700</x>
@@ -63,7 +40,7 @@
      <string>Side View</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="CreateGroup_3">
+   <widget class="QPushButton" name="TopView">
     <property name="geometry">
      <rect>
       <x>830</x>
@@ -76,7 +53,7 @@
      <string>Top View</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="CreateGroup_4">
+   <widget class="QPushButton" name="IsoView">
     <property name="geometry">
      <rect>
       <x>830</x>
@@ -108,6 +85,17 @@
       <string>Feature</string>
      </property>
     </column>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>651</width>
+      <height>601</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="Grid"/>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

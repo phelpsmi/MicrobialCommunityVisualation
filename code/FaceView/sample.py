@@ -27,4 +27,7 @@ class Sample(dict):
 		
 	def __hash__(self):
 		return self.name.__hash__()
+
+	def __eq__(self, other):
+                return self.name == other.getName
 	

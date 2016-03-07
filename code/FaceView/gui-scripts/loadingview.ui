@@ -86,7 +86,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QRadioButton" name="norm1">
+   <widget class="QRadioButton" name="Norm1">
     <property name="geometry">
      <rect>
       <x>590</x>
@@ -105,7 +105,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QRadioButton" name="norm2">
+   <widget class="QRadioButton" name="Norm2">
     <property name="geometry">
      <rect>
       <x>590</x>
@@ -118,7 +118,7 @@
      <string>Ratio: Normalize based on each sample's population</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="norm3">
+   <widget class="QRadioButton" name="Norm3">
     <property name="geometry">
      <rect>
       <x>590</x>
@@ -144,7 +144,7 @@
      <string>Normalization:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="NormVal">
     <property name="enabled">
      <bool>true</bool>
     </property>
