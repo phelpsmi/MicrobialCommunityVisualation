@@ -209,6 +209,8 @@ if __name__ == '__main__':
 			for key, val in params.iteritems():
 				if key == 'name':
 					continue
+				if key == '':
+					continue
 				if not modDict.has_key(key):
 					raise SyntaxError("There is no modifier: " + key)
 				else:

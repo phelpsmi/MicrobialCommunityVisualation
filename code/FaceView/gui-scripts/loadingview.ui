@@ -160,8 +160,8 @@
    <widget class="QPushButton" name="Generate">
     <property name="geometry">
      <rect>
-      <x>820</x>
-      <y>790</y>
+      <x>840</x>
+      <y>590</y>
       <width>111</width>
       <height>23</height>
      </rect>
@@ -173,8 +173,8 @@
    <widget class="QPushButton" name="Cancel">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>790</y>
+      <x>690</x>
+      <y>590</y>
       <width>111</width>
       <height>23</height>
      </rect>
@@ -189,7 +189,7 @@
       <x>20</x>
       <y>110</y>
       <width>941</width>
-      <height>661</height>
+      <height>461</height>
      </rect>
     </property>
     <property name="sortingEnabled">
