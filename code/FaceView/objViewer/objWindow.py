@@ -256,7 +256,7 @@ class ObjWidget(QGLWidget):
 			('uST', GL.GL_FLOAT, 2, numpy.array(self.data.texCoords(), dtype='float32')),
 			('uModelNormal', GL.GL_FLOAT, 3, numpy.array(self.data.normals(), dtype='float32'))] #name, gl type, vector length, data
 			
-		self.loadShaders('./vert.glsl', './frag.glsl')
+		self.loadShaders('../FaceView/objViewer/vert.glsl', '../FaceView/objViewer/frag.glsl')
 		self.loadData()
 		
 	def unloadData(self):
@@ -322,6 +322,7 @@ class ObjWidget(QGLWidget):
 		#Compile vertex shader
 		GL.glShaderSource(vert, vertexText)
 		GL.glCompileShader(vert)
+		print os.getcwd()
 		if GL.glGetShaderiv(vert, GL.GL_COMPILE_STATUS) != GL.GL_TRUE:
 			raise RuntimeError("\n\nVertex Shader: " + GL.glGetShaderInfoLog(vert))
 		

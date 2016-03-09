@@ -19,6 +19,7 @@ class ObjModel:
 		self.sts = []
 		self.iList = []
 		mtl = self.loadModel(objPath)
+		print "\n\n" + mtl + "\n" + os.path.join(os.path.dirname(os.path.abspath(objPath)),mtl)  + "\n\n"
 		self.loadMaterial(os.path.join(os.path.dirname(os.path.abspath(objPath)),mtl ))
 		
 	def loadModel(self, filePath):
@@ -29,6 +30,7 @@ class ObjModel:
 		faces = []
 		with open(filePath, 'rU') as f:
 			for line in f:
+				oLine = line
 				line = line.split()
 				if len(line) == 0:
 					#Empty line. Unimportant
@@ -39,7 +41,9 @@ class ObjModel:
 				elif line[0] == 'mtllib':
 					
 					#Use this material. There will only be 1 in the files we're loading.
-					mtl = line[1]
+					s = oLine[oLine.find('mtllib') + len('mtllib'):].strip()
+					print "Loading: \n\n" + s + "\n\n"
+					mtl = s
 				elif line[0] == 'v':
 					#A vertex
 					pos = numpy.array([float(line[1]), float(line[2]), float(line[3]), 1.0], dtype='f')
