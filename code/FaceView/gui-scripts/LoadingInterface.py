@@ -4,7 +4,11 @@ Qt GUI for the FaceView software
 """
 
 from PyQt4 import QtGui, uic, QtCore
-import sys
+import sys, os
+
+if __name__=="__main__":
+    os.chdir('..')
+    sys.path.append('./objViewer')
 
 import main as parent
 import fvParser
@@ -25,6 +29,9 @@ class loadingWindow(QtGui.QMainWindow):
         self.ui = form()
         
         self.ui.setupUi(self)
+
+        self.ui.table.setColumnWidth(0, 600)
+        self.ui.table.setColumnWidth(1, 250)
         
         #Set triggers for buttons
         self.ui.SelectDataFile.clicked.connect(self.setDataFile)
@@ -32,7 +39,6 @@ class loadingWindow(QtGui.QMainWindow):
         self.ui.Cancel.clicked.connect(self.close)
         self.ui.Generate.clicked.connect(self.generate)
 
-        #Testing Code, don't forget to remove!!!
         self.features = features
 
         self.samples = 0
@@ -42,6 +48,8 @@ class loadingWindow(QtGui.QMainWindow):
         table = self.ui.table
         table.clearContents()
         table.setRowCount(len(orgs))
+        print(len(orgs))
+        print orgs
         
         for idx, org in enumerate(orgs):
             item = QtGui.QTableWidgetItem(org)
@@ -50,7 +58,7 @@ class loadingWindow(QtGui.QMainWindow):
 
     def newFeatureBox(self, features):
         box = QtGui.QComboBox()
-
+        box.addItem("")
         for feature in features:
             box.addItem(feature)
         return box
@@ -82,7 +90,7 @@ class loadingWindow(QtGui.QMainWindow):
             if not str(self.ui.NormVal.text()).isdigit():
                 errors += ("Must enter digit for manual normalization.\n")
 
-        selected_features = self.getSelectedFeatures()
+        selected_features = filter(bool, self.getSelectedFeatures())
         if len(selected_features) != len(set(selected_features)):
             errors += ("Repeated feature detected.\n")
 
