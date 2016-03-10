@@ -353,6 +353,10 @@ class ObjWidget(QGLWidget):
 				print "Double check " + str(key)+ "."
 				print "It was not found, but it may have been optimized out of the shaders."
 				
+	def setHighlighted(self, hl):
+		self.highlighted = hl
+		self.updateGL()
+				
 if __name__ == '__main__':
 	import objModel
 	import os

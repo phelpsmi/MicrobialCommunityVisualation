@@ -42,6 +42,7 @@ class thumbnailWindow(QtGui.QMainWindow):
         self.ui.DeleteGroup.clicked.connect(self.deleteGroup)
         self.ui.ViewSelect.activated.connect(self.selectGroup)
         self.ui.Analyze.clicked.connect(self.analyze)
+        self.objWidgets = []
 
     # Checks if the mouse was hovered over a face on click.
     # If it is we toggle the highlight which requires reloading
@@ -50,15 +51,16 @@ class thumbnailWindow(QtGui.QMainWindow):
         grid = self.ui.Grid
 
         widget, row, col = self.hoveredWidget(event)
-
         if not widget is None:
             if widget.highlighted:
-                new_widget = objWindow.ObjWidget(widget.data, False)
+				widget.setHighlighted(False)
+                #new_widget = objWindow.ObjWidget(widget.data, False)
             else:
-                new_widget = objWindow.ObjWidget(widget.data, True)
+				widget.setHighlighted(True)
+                #new_widget = objWindow.ObjWidget(widget.data, True)
 
-            grid.removeWidget(widget)
-            grid.addWidget(new_widget, row, col)
+            #grid.removeWidget(widget)
+            #grid.addWidget(new_widget, row, col)
 
     def hoveredWidget(self, event):
         grid = self.ui.Grid
@@ -86,9 +88,10 @@ class thumbnailWindow(QtGui.QMainWindow):
         grid = self.ui.Grid
         widget = grid.itemAtPosition(row, col).widget()
         if not widget.highlighted:
-            new_widget = objWindow.ObjWidget(widget.data, True)
-            grid.removeWidget(widget)
-            grid.addWidget(new_widget, row, col)
+			widget.setHighlighted(True)
+            #new_widget = objWindow.ObjWidget(widget.data, True)
+            #grid.removeWidget(widget)
+            #grid.addWidget(new_widget, row, col)
 
     def clearWidget(self, idx):
         row = idx/self.size
@@ -97,9 +100,10 @@ class thumbnailWindow(QtGui.QMainWindow):
         grid = self.ui.Grid
         widget = grid.itemAtPosition(row, col).widget()
         if widget.highlighted:
-            new_widget = objWindow.ObjWidget(widget.data, False)
-            grid.removeWidget(widget)
-            grid.addWidget(new_widget, row, col)
+			widget.setHighlighted(False)
+            #new_widget = objWindow.ObjWidget(widget.data, False)
+            #grid.removeWidget(widget)
+            #grid.addWidget(new_widget, row, col)
 
     def clearAllWidgets(self):
         for i in range(self.sample_count):
@@ -159,11 +163,14 @@ class thumbnailWindow(QtGui.QMainWindow):
             
 
     def loadObjects(self):
+        if not hasattr(self, 'objWidgets'):
+            self.objWidgets = []
         self.size = math.ceil(math.sqrt(len(glob.glob("../models/*.obj"))))
         grid = self.ui.Grid
         for idx, files in enumerate(glob.glob("../models/*.obj")):
             model = objModel.ObjModel(files)
             widget = objWindow.ObjWidget(model)
+            self.objWidgets.append(widget)
             grid.addWidget(widget, idx/self.size, idx%self.size)
             self.sample_count = idx+1
 
