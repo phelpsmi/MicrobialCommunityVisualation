@@ -1,0 +1,65 @@
+The tasks
+
+1. Load the data file.
+2. Associate a specified microbe with a model parameter
+3. Modify settings to compare ratios
+4. Generate Models
+5. Select samples to view in detail
+6. Find samples with similar ratios of a given organism
+7. Find samples with similar total populations of a given organism.
+
+Task | subject     
+     | 1          | 2                 | 3                     | 4                    | 5          | Average
+-----+------------+-------------------+-----------------------+----------------------+------------+---------
+1    | "Yes" 0:31 | "Yes" 0:44        | "Medium" 0:20         | "In the middle" 0:56 | "Yes" 0:38 | 0:38
+2    | "No" 1:00  | "Don't Know" 0:12 | "Very Confident" 0:01 | "Medium" 2:00        | "No" 0:11  | 0:41
+3    | "Yes" 0:02 | "Yes" 0:03        | "Confident" 0:01      | "4/10" 2:27          | "No" 0:22  | 0:35
+4    | "Yes" 0:10 | "Yes" 0:12        | "Confident" 0:10      | "4/10" 0:10          | "Yes" 0:10 | 0:10
+5    | "No" 1:20  | "No" 0:09         | "Confident" 1:00      | "5/10" 0:09          | "No" 0:11  | 0:34
+6    | "Yes" 1:26 | "Yes" 0:53        | "Maybe" 3:03          | "6/10" 3:08          | "No" 0:59  | 1:54
+7    | "Yes" 0:57 | "Yes" 1:27        | "Yes" 0:50            | "Yes" 1:40           | "Yes" 1:54 | 1:22
+
+Subject 1
+Biology Student
+Comments:
+ Regarding task 5, subject says that blue and green are not intuitive colors to represent whether something is selected or not.
+ 
+ Regarding task 6, subject got distracted by model parameter options, which delayed her completion time.
+ 
+ Subject founc model feature names confusing and unhelpful for determining what the result of the model will be.
+ 
+Subject 2
+Student who's first language is not English
+Comments:
+ Discovered bug in analysis view that not all selected widgets are sent to analysis view when the button is clicked. This bug has since been fixed.
+ 
+ Subject states that the model features list is very detailed, which is good.
+ 
+ Doesn't like that each face doesn't have a corresponding sample name.
+ 
+Subject 3
+Computer Science Student
+Comments:
+ Subject was confused as to how the faces corresponded to the data that we were representing.
+ 
+ Subject states that the output is self explanatory if the user knows what the tool is supposed to do in advance.
+ 
+Subject 4
+Sleep Deprived Student
+Comments:
+ Regarding task 1, the subject had difficulty using basic Windows functionality, but this difficulty decreased as the test progressed.
+ 
+ Regarding task 2, subject said that the tool was "Very thorough".
+ 
+ Regarding task 3, the subject exceeded the maximum time limit without showing progress. Subject was unable to find the ratio radio button.
+ 
+ Regarding task 4, the subject suggests that we include a loading bar, or some way to show the user that the tool is working. I suspect closing the window to reveal the python console would work as well.
+ 
+ After test completion, subject states that it was difficult, and would like to try again for a better completion time.
+ 
+ Subject states that feature names were not intuitively connected to model parameters.
+ 
+Subject 5
+Fish and Wildlife Student
+Comments:
+ Regarding task 7, subject mentioned that not all model features are visible from the thumbnail view. He suggests making the models rotate so that all sides and angles are visible.
