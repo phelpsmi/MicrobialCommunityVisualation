@@ -132,8 +132,9 @@ class thumbnailWindow(QtGui.QMainWindow):
         selected = []
         for i in range(self.sample_count):
             row = i/self.size
-            col = i/self.size
+            col = i%self.size
             if self.ui.Grid.itemAtPosition(row, col).widget().highlighted:
+                print "widget at " + str(row) + ", " + str(col) + " is highlighted"
                 selected.append(self.samples[i])
         return selected
 
@@ -141,7 +142,7 @@ class thumbnailWindow(QtGui.QMainWindow):
         widgets = []
         for i in range(self.sample_count):
             row = i/self.size
-            col = i/self.size
+            col = i%self.size
             widget = self.ui.Grid.itemAtPosition(row, col).widget()
             if widget.highlighted:
                 widgets.append(widget)
@@ -165,7 +166,7 @@ class thumbnailWindow(QtGui.QMainWindow):
     def loadObjects(self):
         if not hasattr(self, 'objWidgets'):
             self.objWidgets = []
-        self.size = math.ceil(math.sqrt(len(glob.glob("../models/*.obj"))))
+        self.size = int(math.ceil(math.sqrt(len(glob.glob("../models/*.obj")))))
         grid = self.ui.Grid
         for idx, files in enumerate(glob.glob("../models/*.obj")):
             model = objModel.ObjModel(files)
