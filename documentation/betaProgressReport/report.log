@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (preloaded format=pdflatex 2016.2.8)  11 MAR 2016 09:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (preloaded format=pdflatex 2016.2.8)  11 MAR 2016 11:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -773,7 +773,7 @@ xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2015
 /texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2015/texmf-dist/font
 s/type1/urw/times/utmb8a.pfb><c:/texlive/2015/texmf-dist/fonts/type1/urw/times/
 utmr8a.pfb><c:/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (18 pages, 427739 bytes).
+Output written on report.pdf (18 pages, 427725 bytes).
 PDF statistics:
  94 PDF objects out of 1000 (max. 8388607)
  61 compressed objects within 1 object stream
