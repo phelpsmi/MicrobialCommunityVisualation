@@ -26,7 +26,7 @@ Comments:
  
  Regarding task 6, subject got distracted by model parameter options, which delayed her completion time.
  
- Subject founc model feature names confusing and unhelpful for determining what the result of the model will be.
+ Subject found model feature names confusing and unhelpful for determining what the result of the model will be.
  
 Subject 2
 Student who's first language is not English

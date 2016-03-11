@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (preloaded format=pdflatex 2016.2.8)  12 FEB 2016 14:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (preloaded format=pdflatex 2016.2.8)  11 MAR 2016 01:35
 entering extended mode
- \write18 enabled.
+ restricted \write18 enabled.
  %&-line parsing enabled.
 **./report.tex
 (./report.tex
@@ -22,7 +22,6 @@ LaTeX Font Info:    Try loading font information for OT1+ptm on input line 503.
 (c:/texlive/2015/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
-** ATTENTION: Single column mode is not typically used with IEEE publications.
 -- Using 8.5in x 11in (letter) paper.
 -- Using PDF output.
 \@IEEEnormalsizeunitybaselineskip=\dimen105
@@ -474,120 +473,58 @@ Package: pst-node 2010/04/22 package wrapper for pst-node.tex
 \pst@argcnt=\count152
 )
 File: pst-node.tex 2014/08/04 1.35 `pst-node' (tvz,hv)
-) (c:/texlive/2015/texmf-dist/tex/latex/minted/minted.sty
-Package: minted 2015/09/09 v2.1 Yet another Pygments shim for LaTeX
-
-(c:/texlive/2015/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
-
-(c:/texlive/2015/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
-
-(c:/texlive/2015/texmf-dist/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
-
-(c:/texlive/2015/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
 )
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-)))
-(c:/texlive/2015/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
-)
-(c:/texlive/2015/texmf-dist/tex/latex/tools/calc.sty
-Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count153
-\calc@Bcount=\count154
-\calc@Adimen=\dimen179
-\calc@Bdimen=\dimen180
-\calc@Askip=\skip59
-\calc@Bskip=\skip60
-LaTeX Info: Redefining \setlength on input line 80.
-LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count155
-\calc@Cskip=\skip61
-)
-(c:/texlive/2015/texmf-dist/tex/latex/ifplatform/ifplatform.sty
-Package: ifplatform 2010/10/22 v0.4 Testing for the operating system
+(c:/texlive/2015/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count153
+\lst@gtempboxa=\box38
+\lst@token=\toks45
+\lst@length=\count154
+\lst@currlwidth=\dimen179
+\lst@column=\count155
+\lst@pos=\count156
+\lst@lostspace=\dimen180
+\lst@width=\dimen181
+\lst@newlines=\count157
+\lst@lineno=\count158
+\lst@maxwidth=\dimen182
 
-(c:/texlive/2015/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+(c:/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count159
+\lst@skipnumbers=\count160
+\lst@framebox=\box39
 )
+(c:/texlive/2015/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
+
+(c:/texlive/2015/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2014/10/28 v2.10 `tabularx' package (DPC)
+
+(c:/texlive/2015/texmf-dist/tex/latex/tools/array.sty
+Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen183
+\extrarowheight=\dimen184
+\NC@list=\toks46
+\extratabsurround=\skip59
+\backup@length=\skip60
+)
+\TX@col@width=\dimen185
+\TX@old@table=\dimen186
+\TX@old@col=\dimen187
+\TX@target=\dimen188
+\TX@delta=\dimen189
+\TX@cols=\count161
+\TX@ftn=\toks47
+)
+(c:/texlive/2015/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
 
 (c:/texlive/2015/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
-(c:/texlive/2015/texmf-dist/tex/generic/oberdiek/catchfile.sty
-Package: catchfile 2011/03/01 v1.6 Catch the contents of a file (HO)
-))
-(c:/texlive/2015/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count156
-)
-(c:/texlive/2015/texmf-dist/tex/generic/xstring/xstring.sty
-(c:/texlive/2015/texmf-dist/tex/generic/xstring/xstring.tex
-\@xs@message=\write4
-\integerpart=\count157
-\decimalpart=\count158
-)
-Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
-)
-(c:/texlive/2015/texmf-dist/tex/latex/lineno/lineno.sty
-Package: lineno 2005/11/02 line numbers on paragraphs v4.41
-\linenopenalty=\count159
-\output=\toks45
-\linenoprevgraf=\count160
-\linenumbersep=\dimen181
-\linenumberwidth=\dimen182
-\c@linenumber=\count161
-\c@pagewiselinenumber=\count162
-\c@LN@truepage=\count163
-\c@internallinenumber=\count164
-\c@internallinenumbers=\count165
-\quotelinenumbersep=\dimen183
-\bframerule=\dimen184
-\bframesep=\dimen185
-\bframebox=\box38
-LaTeX Info: Redefining \\ on input line 3056.
-)
-\minted@appexistsfile=\read2
-\FV@BreakIndent=\dimen186
-\FV@BreakSymbolSepLeft=\dimen187
-\FV@BreakSymbolSepRight=\dimen188
-\FV@BreakSymbolIndentLeft=\dimen189
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 688.
-
-
-(c:/texlive/2015/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
-\FV@BreakSymbolIndentRight=\dimen190
-\c@FancyVerbLineBreakLast=\count166
-\FV@LineBox=\box39
-\FV@LineIndentBox=\box40
-\minted@bgbox=\box41
-\minted@code=\write5
-\c@minted@FancyVerbLineTemp=\count167
-\@float@every@listing=\toks46
-\c@listing=\count168
-)
-runsystem(if not exist "_minted-report" mkdir "_minted-report")...executed.
-
-
-(./_minted-report/default.pygstyle)
-(c:/texlive/2015/texmf-dist/tex/latex/geometry/geometry.sty
-Package: geometry 2010/09/12 v5.6 Page Geometry
-
 (c:/texlive/2015/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
@@ -595,63 +532,73 @@ Package ifvtex Info: VTeX not detected.
 (c:/texlive/2015/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count169
-\Gm@cntv=\count170
-\c@Gm@tempcnt=\count171
-\Gm@bindingoffset=\dimen191
-\Gm@wd@mp=\dimen192
-\Gm@odd@mp=\dimen193
-\Gm@even@mp=\dimen194
-\Gm@layoutwidth=\dimen195
-\Gm@layoutheight=\dimen196
-\Gm@layouthoffset=\dimen197
-\Gm@layoutvoffset=\dimen198
-\Gm@dimlist=\toks47
+\Gm@cnth=\count162
+\Gm@cntv=\count163
+\c@Gm@tempcnt=\count164
+\Gm@bindingoffset=\dimen190
+\Gm@wd@mp=\dimen191
+\Gm@odd@mp=\dimen192
+\Gm@even@mp=\dimen193
+\Gm@layoutwidth=\dimen194
+\Gm@layoutheight=\dimen195
+\Gm@layouthoffset=\dimen196
+\Gm@layoutvoffset=\dimen197
+\Gm@dimlist=\toks48
+)
+(c:/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
 ) (./pygments.tex
 (c:/texlive/2015/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2015/03/17 v1.2c Input encoding file
-\inpenc@prehook=\toks48
-\inpenc@posthook=\toks49
+\inpenc@prehook=\toks49
+\inpenc@posthook=\toks50
 
 (c:/texlive/2015/texmf-dist/tex/latex/base/latin1.def
 File: latin1.def 2015/03/17 v1.2c Input encoding file
-)))
-runsystem(for ^%i in (pygmentize.exe pygmentize.bat pygmentize.cmd) do set >"re
-port.aex" <nul: /p x=^%~$PATH:i>>"report.aex")...executed.
-
-runsystem(del "report.aex")...executed.
-
- (./report.aux)
+))) (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
 
 -- Lines per column: 51 (approximate, difference = 2.295pt).
 (c:/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count172
-\scratchdimen=\dimen199
-\scratchbox=\box42
-\nofMPsegments=\count173
-\nofMParguments=\count174
-\everyMPshowfont=\toks50
-\MPscratchCnt=\count175
-\MPscratchDim=\dimen256
-\MPnumerator=\count176
-\makeMPintoPDFobject=\count177
-\everyMPtoPDFconversion=\toks51
-) (c:/texlive/2015/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+\scratchcounter=\count165
+\scratchdimen=\dimen198
+\scratchbox=\box40
+\nofMPsegments=\count166
+\nofMParguments=\count167
+\everyMPshowfont=\toks51
+\MPscratchCnt=\count168
+\MPscratchDim=\dimen199
+\MPnumerator=\count169
+\makeMPintoPDFobject=\count170
+\everyMPtoPDFconversion=\toks52
+) (c:/texlive/2015/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(c:/texlive/2015/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(c:/texlive/2015/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
 (c:/texlive/2015/texmf-dist/tex/latex/oberdiek/grfext.sty
@@ -660,6 +607,19 @@ Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
 (c:/texlive/2015/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
 Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
 ))
+(c:/texlive/2015/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(c:/texlive/2015/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(c:/texlive/2015/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
 Package grfext Info: Graphics extension search list:
 (grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
 G,.JBIG2,.JB2,.eps]
@@ -669,7 +629,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-(./_minted-report/default-pyg-prefix.pygstyle)
+\c@lstlisting=\count171
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -686,15 +647,15 @@ e
 * \textheight=614.295pt
 * \oddsidemargin=18.0675pt
 * \evensidemargin=18.0675pt
-* \topmargin=-33.342pt
+* \topmargin=-38.87326pt
 * \headheight=12.0pt
-* \headsep=21.342pt
+* \headsep=26.87326pt
 * \topskip=12.0pt
-* \footskip=25.80774pt
+* \footskip=38.27646pt
 * \marginparwidth=20.0pt
 * \marginparsep=10.0pt
 * \columnsep=12.0pt
-* \skip\footins=10.79993pt plus 4.79993pt minus 2.39996pt
+* \skip\footins=16.19989pt plus 7.19989pt minus 3.59995pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -714,62 +675,108 @@ ex.map}
 Non-PDF special ignored!
 Non-PDF special ignored!
 Non-PDF special ignored!
-Non-PDF special ignored!] <Generated.png, id=7, 404.26031pt x 295.85532pt>
-File: Generated.png Graphic file (type png)
+Non-PDF special ignored!] (./report.toc
+LaTeX Font Info:    Try loading font information for U+msa on input line 4.
 
-<use Generated.png>
-Package pdftex.def Info: Generated.png used on input line 74.
-(pdftex.def)             Requested size: 404.25932pt x 295.85458pt.
-LaTeX Font Info:    Try loading font information for U+msa on input line 79.
- (c:/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
+(c:/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 79.
+LaTeX Font Info:    Try loading font information for U+msb on input line 4.
 
 (c:/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [2
+))
+\tf@toc=\write4
+\openout4 = `report.toc'.
 
- <./Generated.png>]
-<LoadingInterface.png, id=15, 950.80219pt x 542.77782pt>
-File: LoadingInterface.png Graphic file (type png)
+ [2
 
-<use LoadingInterface.png>
-Package pdftex.def Info: LoadingInterface.png used on input line 92.
-(pdftex.def)             Requested size: 433.62pt x 247.53575pt.
+]
+<analysis.png, id=11, 481.8pt x 446.41782pt>
+File: analysis.png Graphic file (type png)
+ <use analysis.png>
+Package pdftex.def Info: analysis.png used on input line 94.
+(pdftex.def)             Requested size: 433.62pt x 401.78593pt.
 
-<MainInterface.png, id=16, 945.5325pt x 545.03625pt>
-File: MainInterface.png Graphic file (type png)
- <use MainInterface.png>
-Package pdftex.def Info: MainInterface.png used on input line 100.
-(pdftex.def)             Requested size: 433.62pt x 249.95459pt.
+<loading.png, id=13, 761.09344pt x 467.49657pt>
+File: loading.png Graphic file (type png)
+ <use loading.png>
+Package pdftex.def Info: loading.png used on input line 112.
+(pdftex.def)             Requested size: 433.62pt x 266.35454pt.
+ [3]
+<Comparison.png, id=18, 711.4078pt x 463.7325pt>
+File: Comparison.png Graphic file (type png)
+ <use Comparison.png>
+Package pdftex.def Info: Comparison.png used on input line 120.
+(pdftex.def)             Requested size: 433.62pt x 282.66412pt.
+ [4 <./analysis.png>] [5 <./loading.png>] [6 <./Comparison.png>]
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 155.
 
-[3 <./LoadingInterface.png>] [4 <./MainInterface.png>]
-(./_minted-report/0663E74C2895357A653ED56D5C1321B9CFD058D7AD98F2B3DEF764671FF53
-B51.pygtex
-LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 2.
-LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
-(Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 4.
- [5]) [6] [7] (./report.aux) ) 
+
+(c:/texlive/2015/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+(../../code/FaceView/fvParser.py) [7]
+(../../code/FaceView/objViewer/objWindow.py [8] [9] [10] [11] [12] [13]
+[14] [15]) [16]
+Underfull \hbox (badness 10000) in paragraph at lines 220--220
+[]|\OT1/ptm/m/n/10 Average
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 220--220
+[]|\OT1/ptm/m/n/10 ``Medium''
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 220--220
+[]|\OT1/ptm/m/n/10 ``Don't
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 220--220
+[]|\OT1/ptm/m/n/10 ``Medium''
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 220--220
+[]|\OT1/ptm/m/n/10 ``Confident''
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 220--220
+[]|\OT1/ptm/m/n/10 ``Confident''
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 220--220
+[]|\OT1/ptm/m/n/10 ``Confident''
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 220--220
+[]|\OT1/ptm/m/n/10 ``Maybe''
+ []
+
+[17] [18] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 14502 strings out of 493042
- 249723 string characters out of 6138228
- 371412 words of memory out of 5000000
- 17780 multiletter control sequences out of 15000+600000
- 40991 words of font info for 90 fonts, out of 8000000 for 9000
+ 14575 strings out of 493042
+ 237093 string characters out of 6138228
+ 474811 words of memory out of 5000000
+ 17871 multiletter control sequences out of 15000+600000
+ 40966 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,8n,40p,1037b,346s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2015/texmf-dist/fonts/enc/dvips/base/
-8r.enc}<c:/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c
-:/texlive/2015/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb><c:/texlive/2015/t
-exmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2015/texmf-dist/fonts/
-type1/urw/courier/ucrro8a.pfb><c:/texlive/2015/texmf-dist/fonts/type1/urw/times
-/utmr8a.pfb><c:/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (7 pages, 172938 bytes).
+ 38i,10n,72p,1306b,1705s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.e
+nc}<c:/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/te
+xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2015
+/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2015/texmf-dist/font
+s/type1/urw/times/utmb8a.pfb><c:/texlive/2015/texmf-dist/fonts/type1/urw/times/
+utmr8a.pfb><c:/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on report.pdf (18 pages, 427736 bytes).
 PDF statistics:
- 60 PDF objects out of 1000 (max. 8388607)
- 38 compressed objects within 1 object stream
+ 94 PDF objects out of 1000 (max. 8388607)
+ 61 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
