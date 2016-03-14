@@ -48,8 +48,6 @@ class loadingWindow(QtGui.QMainWindow):
         table = self.ui.table
         table.clearContents()
         table.setRowCount(len(orgs))
-        print(len(orgs))
-        print orgs
         
         for idx, org in enumerate(orgs):
             item = QtGui.QTableWidgetItem(org)
@@ -111,13 +109,14 @@ class loadingWindow(QtGui.QMainWindow):
         normalization = self.getNormalization()
         ModelGenerator.generateModels(normalization, maps)
 
-        self.loadThumbnail(len(self.samples), self.samples, self.groups)
+        self.loadThumbnail(len(self.samples), self.samples, self.groups, maps)
         self.close()
 
 
     def getFeatureMap(self):
         selected_features = self.getSelectedFeatures()
         orgs = self.samples[0].getOrgList()
+
         return dict(zip(orgs, selected_features))
             
             
@@ -153,8 +152,8 @@ class loadingWindow(QtGui.QMainWindow):
             orgs = self.samples[0].getOrgList()
             self.setOrganisms(orgs, self.features)
 
-    def loadThumbnail(self, sample_count, samples, groups):
-        self.thumbnail_app = ThumbnailInterface.thumbnailWindow(sample_count, samples, groups)
+    def loadThumbnail(self, sample_count, samples, groups, feature_map):
+        self.thumbnail_app = ThumbnailInterface.thumbnailWindow(sample_count, samples, groups, feature_map)
         self.thumbnail_app.show()     
 
 

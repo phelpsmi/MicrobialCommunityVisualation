@@ -24,7 +24,7 @@ uifile = 'gui-scripts/thumbnailview.ui'
 form, base = uic.loadUiType(uifile)
 
 class thumbnailWindow(QtGui.QMainWindow):
-    def __init__(self, sample_count, samples, groups, parent=None):
+    def __init__(self, sample_count, samples, groups, feature_map, parent=None):
         QtGui.QWidget.__init__(self, parent)
         self.ui = form()
         self.ui.setupUi(self)
@@ -32,6 +32,7 @@ class thumbnailWindow(QtGui.QMainWindow):
         self.sample_count = 0
         self.samples = samples
         self.groups = groups
+        self.map = feature_map
 
         self.initGroupList()
         self.loadObjects()
@@ -83,7 +84,6 @@ class thumbnailWindow(QtGui.QMainWindow):
     def highlightWidget(self, idx):
         row = idx/self.size
         col = idx%self.size
-        print idx
 
         grid = self.ui.Grid
         widget = grid.itemAtPosition(row, col).widget()
@@ -185,8 +185,9 @@ class thumbnailWindow(QtGui.QMainWindow):
         
 
     def loadAnalysis(self, widgets):
-        self.analysis_app = AnalysisInterface.analysisWindow(widgets)
+        self.analysis_app = AnalysisInterface.analysisWindow(widgets, self.map)
         self.analysis_app.show()
+        self.close()
         
 
 def main():
