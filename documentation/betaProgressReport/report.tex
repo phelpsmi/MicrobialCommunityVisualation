@@ -91,7 +91,7 @@ To that effect, our project loads population data from files in supported format
 \subsection{Backend}
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{analysis}
+	\includegraphics[width=\textwidth]{analysis.PNG}
 	\caption{Several models generated from a sample data file. This file had few enough organisms that only some features were modified. The rest were left at their default values to avoid distracting from the significant features of the data set. This image was generated using the obj viewer widget that Thomas wrote and the analysis view page that Michael wrote.}
 	\label{fig:generated}
 \end{figure}
@@ -109,7 +109,7 @@ Michael has written the data loading page, the main selection page, and the deta
 Thomas has written an obj viewer widget that Michael is using to display the obj files.
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{loading}
+	\includegraphics[width=\textwidth]{loading.PNG}
 	\caption{The UI page that allows users to perform tasks related to loading data files.}
 	\label{fig:LoadingInterface}
 \end{figure}
@@ -117,7 +117,7 @@ Thomas has written an obj viewer widget that Michael is using to display the obj
 The Data Loading page (see Figure \ref{fig:LoadingInterface}) allows users to select a data file and a groupings file. These files will be loaded, and then used to populate the table on the bottom, which allows users to associate model parameters with organisms in the sample. On the top right, a series of radio buttons can be used to specify which normalizing strategy to use. That is, whether the generated models should reflect ratio of each organism to the whole of the sample, or whether the generated models should reflect the ratio of each organism to the largest population in the file, or whether the models should be normalized in terms of some other number entirely. The first is good for identifying samples with similar ratios of an organism to the population in the sample. The second is good for identifying samples with similar total populations of an organism. The third is good for comparing models in a different file.
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{Comparison}
+	\includegraphics[width=\textwidth]{Comparison.PNG}
 	\caption{The UI page that allows users to perform tasks related to selecting data files.}
 	\label{fig:MainInterface}
 \end{figure}
