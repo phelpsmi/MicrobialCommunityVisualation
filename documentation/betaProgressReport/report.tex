@@ -142,7 +142,7 @@ The most difficult problem that Thomas faced was simply trying to read and decyp
 
 Additionally, the obj viewer widget proved challenging simply because the the error policy for OpenGL is to fail silently and not draw anything. Most of this can be mitigated by occasional calls to $glGetError()$, but some mistakes are not technically errors, yet still don't produce the intended output.
 
-For Michael, the most difficult problem was figuring out how to display the obj files within the Qt based interface. There is surprisingly little documentation on how to perform such a task. As of now, the obj viewer widget should solve these problems, but nevertheless, it was a concern earlier on, and one that Michael put an exceptional amount of work into.
+For Michael, the most difficult problem was figuring out how to properly transition between the three interfaces and just using PyQt in general as he had never used any GUI libraries before. The main difficulty came with Qt's poor functionality when trying to control multiple seperate windows without having a main central window. Additionally, there was a great deal of difficulty in making sure all of the libraries used in the code were in sync with what Thomas was developing with.
 
 \section{Interesting Code} \label{interestingCode}
 
