@@ -69,7 +69,7 @@
 \begin{document}
 \maketitle
 \section*{Abstract}
-We intend for this project to provide an easier to use way to visualize microbial population data than some existing techniques, such as pie or bar charts, within the constraints provided by our client. As of the midterm progress report, we have had working backend components for loading population data files in the QIIME OTU format, generating 3d models based on the data in Wavefront obj format, and converting population counts into normalized values that can be used to generate 3D models of human faces, as well as a preliminary user interface (UI) for most of our project. Since then, we've improved the UI, connected the UI with backend functionality mentioned before, and done user testing to identify new improvements to be made. The remaining work is simply to fix the problems we've identified in our testing, continue testing to identify more problems, and possibly implement some of our stretch goals, such as expanding file format support.
+We intend for this project to provide an easier to use way to visualize microbial population data than some existing techniques, such as pie or bar charts, within the constraints provided by our client. As of the midterm progress report, we have had working backend components for loading population data files in the QIIME OTU format, generating 3D models based on the data in Wavefront obj format, and converting population counts into normalized values that can be used to generate 3D models of human faces, as well as a preliminary user interface (UI) for most of our project. Since then, we've improved the UI, connected the UI with backend functionality mentioned before, and done user testing to identify new improvements to be made. The remaining work is simply to fix the problems we've identified in our testing, continue testing to identify more problems, and possibly implement some of our stretch goals, such as expanding file format support.
 
 \clearpage
 
@@ -84,7 +84,7 @@ For this report, we intend to do something similar, but with more thorough proof
 
 The purpose of the project is to visualize microbial population data in a way that allows microbiologists (and secondarily other researchers) to more easily compare complex population data. To that effect, our client has requested that we model it as human-esque faces, in order to take advantage of humans' ability to recognize and compare those faces. Resulting models need not look like visually appealing humans, but they should represent the data.
 
-To that effect, our project loads population data from files in supported formats and sample grouping data in corresponding metadata files. This data is converted to model attributes, values that determine how exaggerated some feature of the face (called a model parameter) is, based on associations provided by the user in the application. These attributes are passed into MakeHuman, an open source project that generates 3d models of humans. It generates 3D models in Wavefront obj format for each sample. Then the models are loaded and displayed to the user, who can view smaller sets of samples based on grouping data, or can choose a subset of no more than six samples to view and inspect in more detail.
+To that effect, our project loads population data from files in supported formats and sample grouping data in corresponding metadata files. This data is converted to model attributes, values that determine how exaggerated some feature of the face (called a model parameter) is, based on associations provided by the user in the application. These attributes are passed into MakeHuman, an open source project that generates 3D models of humans. It generates 3D models in Wavefront obj format for each sample. Then the models are loaded and displayed to the user, who can view smaller sets of samples based on grouping data, or can choose a subset of no more than six samples to view and inspect in more detail.
 
 \section{Completed Content}
 
@@ -156,7 +156,7 @@ The ParserRegistry itself is little more than a wrapper around a dictionary, map
 
 \subsection{objWidget} 
 
-The following is a PyQt widget written by Thomas which inherits from the QOpenGLWidget in standard PyQt. Additionally, the file includes additional functions used by the class for creating transformation and projection matrices. The class itself accepts a 3d model object containing the geometry, vectors perpendicular to the surface (which are useful for smooth shading), and material values (used for model color). 
+The following is a PyQt widget written by Thomas which inherits from the QOpenGLWidget in standard PyQt. Additionally, the file includes additional functions used by the class for creating transformation and projection matrices. The class itself accepts a 3D model object containing the geometry, vectors perpendicular to the surface (which are useful for smooth shading), and material values (used for model color). 
 
 \lstinputlisting[language=python]{../../code/FaceView/objViewer/objWindow.py}
 
