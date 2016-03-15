@@ -3,7 +3,7 @@
 default: pdf
 
 pdf: analysis.PNG Comparison.PNG loading.PNG report.tex
-	pdflatex report.tex
+	latex report.tex
 
 clean:
 	-@rm -f *.aux
