@@ -1,0 +1,20 @@
+\contentsline {section}{\numberline {I}A Note Regarding Division of Labor in this Document and the Corresponding Video}{2}
+\contentsline {section}{\numberline {II}Purposes and Goals}{3}
+\contentsline {section}{\numberline {III}Completed Content}{3}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}Backend}{3}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}Frontend}{4}
+\contentsline {section}{\numberline {IV}Remaining Work}{5}
+\contentsline {section}{\numberline {V}Significant Problems and Associated Solutions}{6}
+\contentsline {section}{\numberline {VI}Interesting Code}{7}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-A}}fvParser}{7}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-B}}objWidget}{8}
+\contentsline {section}{\numberline {VII}User Study}{16}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-A}}Users}{16}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-B}}Methods}{16}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-C}}Tasks}{17}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}}Results}{17}
+\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}1}Subject 1}{17}
+\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}2}Subject 2}{17}
+\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}3}Subject 3}{17}
+\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}4}Subject 4}{18}
+\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}5}Subject 5}{18}
