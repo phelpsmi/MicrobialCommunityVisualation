@@ -191,7 +191,7 @@ class ObjWidget(QGLWidget):
 		if self.highlighted:
 			GL.glClearColor(0.0, 0.5, 0.0, 1.0)
 		else:
-			GL.glClearColor(0.2, 0.2, 0.8, 1.0)
+			GL.glClearColor(0.5, 0.5, 0.5, 1.0)
 		GL.glDisable(GL.GL_CULL_FACE)
 		GL.glClear(GL.GL_DEPTH_BUFFER_BIT | GL.GL_COLOR_BUFFER_BIT)
 		
