@@ -37,7 +37,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Side View</string>
+     <string>Left View</string>
     </property>
    </widget>
    <widget class="QPushButton" name="TopView">
@@ -50,7 +50,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Top View</string>
+     <string>Right View</string>
     </property>
    </widget>
    <widget class="QPushButton" name="IsoView">

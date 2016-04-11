@@ -68,7 +68,7 @@ class analysisWindow(QtGui.QMainWindow):
     
     def topView(self):
         for widget in self.faces:
-            widget.rotate(-90, 0)
+            widget.rotate(0, -90)
 
     def isoView(self):
         for widget in self.faces:
