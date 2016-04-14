@@ -21,6 +21,8 @@ form, base = uic.loadUiType(uifile)
 class analysisWindow(QtGui.QMainWindow):
     def __init__(self, widgets=[], feature_map={}, parent=None):
         QtGui.QWidget.__init__(self, parent)
+
+        self.parent = parent
         self.ui = form()
 
         
@@ -39,6 +41,7 @@ class analysisWindow(QtGui.QMainWindow):
         self.ui.SideView.clicked.connect(self.sideView)
         self.ui.TopView.clicked.connect(self.topView)
         self.ui.IsoView.clicked.connect(self.isoView)
+        self.ui.Back.clicked.connect(self.back)
 
     def mouseMoveEvent(self, event):
         x_dif = self.x - event.x()
@@ -85,6 +88,11 @@ class analysisWindow(QtGui.QMainWindow):
             table.setItem(i, 0, org_item)
             table.setItem(i, 1, feature_item)
             i += 1
+
+    def back(self):
+        self.parent.show()
+        self.close()
+        
 
 def main():
     app = QtGui.QApplication(sys.argv)

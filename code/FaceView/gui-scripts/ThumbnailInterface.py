@@ -12,6 +12,7 @@ if __name__=="__main__":
     os.chdir('..')
 
 import AnalysisInterface
+import LoadingInterface
 
 sys.path.append('./objViewer')
 
@@ -24,15 +25,16 @@ uifile = 'gui-scripts/thumbnailview.ui'
 form, base = uic.loadUiType(uifile)
 
 class thumbnailWindow(QtGui.QMainWindow):
-    def __init__(self, sample_count, samples, groups, feature_map, parent=None):
+    def __init__(self, prog_vars, parent=None):
         QtGui.QWidget.__init__(self, parent)
         self.ui = form()
         self.ui.setupUi(self)
 
+        self.prog_vars = prog_vars
         self.sample_count = 0
-        self.samples = samples
-        self.groups = groups
-        self.map = feature_map
+        self.samples = prog_vars['samples']
+        self.groups = prog_vars['groups']
+        self.map = prog_vars['feature_map']
 
         self.initGroupList()
         self.loadObjects()
@@ -43,7 +45,11 @@ class thumbnailWindow(QtGui.QMainWindow):
         self.ui.DeleteGroup.clicked.connect(self.deleteGroup)
         self.ui.ViewSelect.activated.connect(self.selectGroup)
         self.ui.Analyze.clicked.connect(self.analyze)
+        self.ui.Back.clicked.connect(self.back)
         self.objWidgets = []
+
+        self.parent = parent
+
 
     # Checks if the mouse was hovered over a face on click.
     # If it is we toggle the highlight which requires reloading
@@ -62,6 +68,10 @@ class thumbnailWindow(QtGui.QMainWindow):
 
             #grid.removeWidget(widget)
             #grid.addWidget(new_widget, row, col)
+
+    def back(self):
+        self.close()
+        self.parent.show()
 
     def hoveredWidget(self, event):
         grid = self.ui.Grid
@@ -143,9 +153,11 @@ class thumbnailWindow(QtGui.QMainWindow):
         for i in range(self.sample_count):
             row = i/self.size
             col = i%self.size
+            
             widget = self.ui.Grid.itemAtPosition(row, col).widget()
             if widget.highlighted:
-                widgets.append(widget)
+                widget_clone = objWindow.ObjWidget(widget.data, False)
+                widgets.append(widget_clone)
         return widgets
     
     def addToGroup(self):
@@ -185,9 +197,8 @@ class thumbnailWindow(QtGui.QMainWindow):
         
 
     def loadAnalysis(self, widgets):
-        self.analysis_app = AnalysisInterface.analysisWindow(widgets, self.map)
-        self.analysis_app.show()
-        self.close()
+        AnalysisInterface.analysisWindow(widgets, self.map, self).show()
+        self.hide()
         
 
 def main():

@@ -40,6 +40,7 @@ class loadingWindow(QtGui.QMainWindow):
         self.ui.Generate.clicked.connect(self.generate)
 
         self.features = features
+        self.prog_vars = {}
 
         self.samples = 0
         self.groups = 0
@@ -105,12 +106,15 @@ class loadingWindow(QtGui.QMainWindow):
 
         
 
-        maps = self.getFeatureMap()
+        self.prog_vars['feature_map'] = self.getFeatureMap()
+        self.prog_vars['samples'] = self.samples
+        self.prog_vars['groups'] = self.groups
         normalization = self.getNormalization()
-        ModelGenerator.generateModels(normalization, maps)
+        ModelGenerator.generateModels(normalization, self.prog_vars['feature_map'])
 
-        self.loadThumbnail(len(self.samples), self.samples, self.groups, maps)
-        self.close()
+        self.hide()
+        self.loadThumbnail()
+        
 
 
     def getFeatureMap(self):
@@ -149,12 +153,12 @@ class loadingWindow(QtGui.QMainWindow):
         if data_file and group_file:
             self.samples, self.groups = fvParser.pReg.parse(data_file, group_file)
 
-            orgs = self.samples[0].getOrgList()
-            self.setOrganisms(orgs, self.features)
+            if self.samples:
+                orgs = self.samples[0].getOrgList()
+                self.setOrganisms(orgs, self.features)
 
-    def loadThumbnail(self, sample_count, samples, groups, feature_map):
-        self.thumbnail_app = ThumbnailInterface.thumbnailWindow(sample_count, samples, groups, feature_map)
-        self.thumbnail_app.show()     
+    def loadThumbnail(self):
+        ThumbnailInterface.thumbnailWindow(self.prog_vars, self).show()
 
 
 def main():
