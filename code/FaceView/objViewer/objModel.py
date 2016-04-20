@@ -1,4 +1,5 @@
 
+from PIL import Image #Module is actually called Pillow, not PIL
 import os
 import numpy
 
@@ -11,6 +12,181 @@ def chunks(l, n):
     """Yield successive n-sized chunks from l."""
     for i in xrange(0, len(l), n):
         yield l[i:i+n]
+		
+class Section:
+	def __init__(self):
+		self.model = None
+		self.mtl = None
+		
+class Material:
+	def __init__(self, name, ambient = numpy.array((1.0, 1.0, 1.0, 1.0)), 
+		diffuse = numpy.array((1.0, 1.0, 1.0, 1.0)), 
+		specular = numpy.array((1.0, 1.0, 1.0, 1.0)), 
+		exponent = 1.0, 
+		dissolve=1.0, 
+		texture=None, 
+		mask=None):
+		self.name = name
+		self.ambient = ambient
+		self.diffuse = diffuse
+		self.specular = specular
+		self.exponent = exponent
+		self.dissolve = dissolve
+		if texture is None:
+			texture = Image.new("RGBA", (1,1), (1,1,1,1))
+		else:
+			texture = Image.open(texture)
+		texture.convert("RGBA")
+		self.texSize = texture.size
+		#possible sticking point.
+		# When closing an image, data from getdata is no longer valid
+		# I think we've copied the data and not just a reference by making 
+		#	it a numpy array, but I'm not sure
+		self.diffuseTexture = numpy.array(list(texture.getdata()), numpy.uint8)
+		texture.close()
+		if mask is None:
+			mask = Image.new("RGBA", (1,1), (1,1,1,1))
+		else:
+			mask = Image.open(mask)
+		mask.convert("RGBA")
+		self.maskSize = mask.size
+		self.mask = numpy.array(list(mask.getdata()), numpy.uint8)
+		mask.close()
+	
+	def getName(self):
+		return string(name)
+	def getAmbient(self):
+		return self.ambient
+	def getDiffuse(self):
+		return self.diffuse
+	def getSpecular(self):
+		return self.specular
+	def getExponent(self):
+		return self.exponent
+	def getDissolve(self):
+		return self.dissolve
+	def getDiffuseTexture(self):
+		return self.diffuseTexture
+	def getMask(self):
+		return self.mask
+	def setAmbient(self, ambient=(1.0, 1.0, 1.0, 1.0)):
+		self.ambient = numpy.array(ambient)
+	def setDiffuse(self, diffuse=(1.0, 1.0, 1.0, 1.0)):
+		self.diffuse = numpy.array(diffuse)
+	def setSpecular(self, specular=(1.0, 1.0, 1.0, 1.0)):
+		self.specular = numpy.array(specular)
+	def setExponent(self, exp=1.0):
+		self.exponent = exp
+	def setDissolve(self, dissolve=1.0):
+		self.dissolve = dissolve
+	def setDiffuseTexture(self, texture=None):
+		if texture is None:
+			texture = Image.new("RGBA", (1,1), (1,1,1,1))
+		else:
+			texture = Image.open(texture)
+		texture.convert("RGBA")
+		self.texSize = texture.size
+		self.diffuseTexture = numpy.array(list(texture.getdata()), numpy.uint8)
+		texture.close()
+	def setMask(self, mask=None):
+		if mask is None:
+			mask = Image.new("RGBA", (1,1), (1,1,1,1))
+		else:
+			mask = Image.open(mask)
+		mask.convert("RGBA")
+		self.maskSize = mask.size
+		self.mask = numpy.array(list(mask.getdata()), numpy.uint8)
+		mask.close()
+		
+	def __str__(self):
+		retval = "<Material:"
+		retval += "\n\tName: " + str(self.name)
+		retval += "\n\tAmbient: " + str(self.ambient)
+		retval += "\n\tDiffuse: " + str(self.diffuse)
+		retval += "\n\tSpecular: " + str(self.specular)
+		retval += "\n\tExponent: " + str(self.exponent)
+		retval += "\n\tDissolve: " + str(self.dissolve)
+		retval += "\n\tDiffuse Texture Size: " + str(self.texSize)
+		retval += "\n\tDiffuse Texture: " + str(self.diffuseTexture)
+		retval += "\n\tMask Size: " + str(self.maskSize)
+		retval += "\n\tMask: " + str(self.mask) + "\n>"
+		return retval
+		
+	def __repr__(self):
+		return self.__str__()
+		
+def removeComment(line):
+ i = 0
+ for i in range(0, len(line)):
+  if '#' in line[i]:
+   break
+  i += 1
+ if i < len(line) and line[i][0] != '#':
+  line[i] = line[i][0:line[i].find('#')]
+  i += 1
+ line = line[:i]
+ return line
+	
+def loadMaterial(mtlPath):
+	if not os.path.isfile(mtlPath):
+		#No material for the file
+		return {}
+	mtls = {}
+	curMtl = None
+	with open(mtlPath, 'rU') as file:
+		for line in file:
+			line = line.split()
+			line = removeComment(line)
+			
+			if len(line) == 0:
+				#Empty line. Skip it
+				continue
+			elif line[0] == 'newmtl':
+				#Create a new material
+				curMtl = Material(line[1])
+				mtls[line[1]] = curMtl
+				continue
+			elif line[0] == 'Ka':
+				#convert all components into floats
+				row = map(lambda x: float(x), line[1:])
+				for i in range(len(row), 4):
+					row.append(0.0)
+				row[-1] = 1.0
+				curMtl.setAmbient(row)
+				continue
+			elif line[0] == 'Kd':
+				#convert all components into floats
+				row = map(lambda x: float(x), line[1:])
+				for i in range(len(row), 4):
+					row.append(0.0)
+				row[-1] = 1.0
+				curMtl.setDiffuse(row)
+				continue
+			elif line[0] == 'Ks':
+				#convert all components into floats
+				row = map(lambda x: float(x), line[1:])
+				for i in range(len(row), 4):
+					row.append(0.0)
+				row[-1] = 1.0
+				curMtl.setSpecular(row)
+				continue
+			elif line[0] == 'd':
+				#dissolve, in this case 1 means no texture, and 0 means only texture
+				curMtl.setDissolve(float(line[1]))
+				continue
+			elif line[0] == 'Ns':
+				#Specular exponent
+				curMtl.setExponent(float(line[1]))
+				continue
+			elif line[0] == 'map_Kd':
+				#Diffuse texture
+				curMtl.setDiffuseTexture(os.path.join(os.path.split(mtlPath)[0], line[1]))
+				continue
+			elif line[0] == 'map_D':
+				#Dissolve texture, aka mask
+				curMtl.setMask(os.path.join(os.path.split(mtlPath)[0], line[1]))
+				continue
+	return mtls
 
 class ObjModel:
 	def __init__(self, objPath):
@@ -24,6 +200,7 @@ class ObjModel:
 		
 	def loadModel(self, filePath):
 		mtl = ''
+		mtls = {}
 		vs = []
 		ns = []
 		sts = []
@@ -66,7 +243,7 @@ class ObjModel:
 					continue
 					#Ignore this for now
 				elif line[0] == 'g':
-					#I don't know what this is, so skip it.
+					#Not important for us
 					continue
 		#Reading file is over.
 		self.vs = []
@@ -109,31 +286,8 @@ class ObjModel:
 	def skinSpecColor(self):
 		return self.specularColor[:]
 	
-	def loadMaterial(self, mtlPath):
-		self.diffuseColor = tuple([0.5, 0.5, 0.5, 1.0])
-		self.specularColor = tuple([1.0, 1.0, 1.0, 1.0])
-		if not os.path.isfile(mtlPath):
-			#No material for the file
-			return
-		with open(mtlPath, 'rU') as file:
-			for line in file:
-				line = line.split()
-				if len(line) == 0:
-					#Empty line. Skip it
-					continue
-				elif line[0].startswith('#'):
-					#It's a comment. Skip it.
-					continue
-				elif line[0] == 'newmtl':
-					#It's not important for out purposes
-					continue
-				elif line[0] == 'Kd':
-					self.diffuseColor = tuple([float(line[1]), float(line[2]), float(line[3]), 1.0])
-				elif line[0] == 'Ks':
-					self.specularColor = tuple([float(line[1]), float(line[2]), float(line[3]), 1.0])
-				elif line[0] == 'd':
-					#Not important for us
-					continue
+	#returns a map of material names to materials
+	
 	
 	def toFile(self, filePath):
 		v = ""
@@ -170,7 +324,16 @@ class ObjModel:
 			file.write(v + "\n" + vn + '\n' + vt + '\n' + f)
 			
 			
-			
+if __name__ == "__main__":
+	#Do some testing/debugging stuff
+	path = "../../models/derp"
+	test = loadMaterial(path + ".mtl")
+	for i in test:
+		print i
+		print test[i]
+		raw_input("continue")
+	
+	
 				
 			
 			
