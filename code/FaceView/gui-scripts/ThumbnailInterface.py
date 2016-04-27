@@ -156,7 +156,7 @@ class thumbnailWindow(QtGui.QMainWindow):
             
             widget = self.ui.Grid.itemAtPosition(row, col).widget()
             if widget.highlighted:
-                widget_clone = objWindow.ObjWidget(widget.data, False)
+                widget_clone = objWindow.ObjWidget(widget.getData(), False)
                 widgets.append(widget_clone)
         return widgets
     
@@ -181,7 +181,7 @@ class thumbnailWindow(QtGui.QMainWindow):
         self.size = int(math.ceil(math.sqrt(len(glob.glob("../models/*.obj")))))
         grid = self.ui.Grid
         for idx, files in enumerate(glob.glob("../models/*.obj")):
-            model = objModel.ObjModel(files)
+            model = objModel.loadModel(files)
             widget = objWindow.ObjWidget(model)
             self.objWidgets.append(widget)
             grid.addWidget(widget, idx/self.size, idx%self.size)

@@ -1,4 +1,5 @@
-
+import OpenGL.GL as GL
+import OpenGL.GLU as GLU
 from PIL import Image #Module is actually called Pillow, not PIL
 import os
 import numpy
@@ -12,12 +13,7 @@ def chunks(l, n):
     """Yield successive n-sized chunks from l."""
     for i in xrange(0, len(l), n):
         yield l[i:i+n]
-		
-class Section:
-	def __init__(self):
-		self.model = None
-		self.mtl = None
-		
+	
 class Material:
 	def __init__(self, name, ambient = numpy.array((1.0, 1.0, 1.0, 1.0)), 
 		diffuse = numpy.array((1.0, 1.0, 1.0, 1.0)), 
@@ -32,8 +28,9 @@ class Material:
 		self.specular = specular
 		self.exponent = exponent
 		self.dissolve = dissolve
+		print texture
 		if texture is None:
-			texture = Image.new("RGBA", (1,1), (1,1,1,1))
+			texture = Image.new("RGBA", (2,2), (1,1,1,1))
 		else:
 			texture = Image.open(texture)
 		texture.convert("RGBA")
@@ -45,12 +42,12 @@ class Material:
 		self.diffuseTexture = numpy.array(list(texture.getdata()), numpy.uint8)
 		texture.close()
 		if mask is None:
-			mask = Image.new("RGBA", (1,1), (1,1,1,1))
+			mask = Image.new("RGBA", (2,2), (1,1,1,1))
 		else:
 			mask = Image.open(mask)
 		mask.convert("RGBA")
 		self.maskSize = mask.size
-		self.mask = numpy.array(list(mask.getdata()), numpy.uint8)
+		self.maskTexture = numpy.array(list(mask.getdata()), numpy.uint8)
 		mask.close()
 	
 	def getName(self):
@@ -67,35 +64,37 @@ class Material:
 		return self.dissolve
 	def getDiffuseTexture(self):
 		return self.diffuseTexture
-	def getMask(self):
-		return self.mask
+	def getMaskTexture(self):
+		return self.maskTexture
 	def setAmbient(self, ambient=(1.0, 1.0, 1.0, 1.0)):
-		self.ambient = numpy.array(ambient)
+		self.ambient = numpy.array(ambient, dtype='float32')
 	def setDiffuse(self, diffuse=(1.0, 1.0, 1.0, 1.0)):
-		self.diffuse = numpy.array(diffuse)
+		self.diffuse = numpy.array(diffuse, dtype='float32')
 	def setSpecular(self, specular=(1.0, 1.0, 1.0, 1.0)):
-		self.specular = numpy.array(specular)
+		self.specular = numpy.array(specular, dtype='float32')
 	def setExponent(self, exp=1.0):
 		self.exponent = exp
 	def setDissolve(self, dissolve=1.0):
 		self.dissolve = dissolve
 	def setDiffuseTexture(self, texture=None):
+		print "setting diffuse texture to image at " + texture
+		print texture is None
 		if texture is None:
-			texture = Image.new("RGBA", (1,1), (1,1,1,1))
+			texture = Image.new("RGBA", (2,2), (1,1,1,1))
 		else:
 			texture = Image.open(texture)
 		texture.convert("RGBA")
 		self.texSize = texture.size
 		self.diffuseTexture = numpy.array(list(texture.getdata()), numpy.uint8)
 		texture.close()
-	def setMask(self, mask=None):
+	def setMaskTexture(self, mask=None):
 		if mask is None:
-			mask = Image.new("RGBA", (1,1), (1,1,1,1))
+			mask = Image.new("RGBA", (2,2), (1,1,1,1))
 		else:
 			mask = Image.open(mask)
 		mask.convert("RGBA")
 		self.maskSize = mask.size
-		self.mask = numpy.array(list(mask.getdata()), numpy.uint8)
+		self.maskTexture = numpy.array(list(mask.getdata()), numpy.uint8)
 		mask.close()
 		
 	def __str__(self):
@@ -109,7 +108,7 @@ class Material:
 		retval += "\n\tDiffuse Texture Size: " + str(self.texSize)
 		retval += "\n\tDiffuse Texture: " + str(self.diffuseTexture)
 		retval += "\n\tMask Size: " + str(self.maskSize)
-		retval += "\n\tMask: " + str(self.mask) + "\n>"
+		retval += "\n\tMask: " + str(self.maskTexture) + "\n>"
 		return retval
 		
 	def __repr__(self):
@@ -184,153 +183,133 @@ def loadMaterial(mtlPath):
 				continue
 			elif line[0] == 'map_D':
 				#Dissolve texture, aka mask
-				curMtl.setMask(os.path.join(os.path.split(mtlPath)[0], line[1]))
+				curMtl.setMaskTexture(os.path.join(os.path.split(mtlPath)[0], line[1]))
 				continue
 	return mtls
 
-class ObjModel:
-	def __init__(self, objPath):
-		self.vs = []
-		self.ns = []
-		self.sts = []
-		self.iList = []
-		mtl = self.loadModel(objPath)
-		print "\n\n" + mtl + "\n" + os.path.join(os.path.dirname(os.path.abspath(objPath)),mtl)  + "\n\n"
-		self.loadMaterial(os.path.join(os.path.dirname(os.path.abspath(objPath)),mtl ))
+class Section:
+	def __init__(self, name, mat=None, 
+		verts=[], 
+		norms=[],
+		texCoords=[],
+		inds=[]):
+		self.vertices = numpy.array(verts, dtype='float32')
+		self.normals = numpy.array(norms, dtype='float32')
+		self.texPos = numpy.array(texCoords, dtype='float32')
+		self.indices = numpy.array(inds, dtype='uint32')
+		self.mtl = mat
+		self.name = name
 		
-	def loadModel(self, filePath):
-		mtl = ''
-		mtls = {}
+	def __str__(self):
+		retval = "<Section" + \
+			"\n\tName: " + str(self.name) + \
+			"\n\tMaterial: " + str(self.mtl) + \
+			"\n\tIndices: " + str(self.indices) + \
+			"\n\tVertices: " + str(self.vertices) + \
+			"\n\tNormals: " + str(self.normals) + \
+			"\n\tTexture Coordinates: " + str(self.texPos) + \
+			">"
+		return retval
+		
+	def __repr__(self):
+		return self.__str__()
+
+
+def loadModel(filePath):
+	vertices = {}
+	nextVertex = 1
+	normals = {}
+	nextNormal = 1
+	texCoords = {}
+	nextTex = 1
+	mtls = {"":None}
+	curMaterial = ""
+	curFaces = []
+	parts = {"":None}
+	curPart = ""
+	with open(filePath, 'rU') as file:
+		for line in file:
+			lineStr = line
+			line = line.split()
+			line = removeComment(line)
+			if len(line) < 1:
+				#Blank line
+				continue
+			if line[0] == "mtllib":
+				#add materials to known materials dict
+				strPath = lineStr.strip()[6:].strip()
+				mtlPath = os.path.join(os.path.split(filePath)[0], strPath)
+				mtls.update(loadMaterial(mtlPath))
+				continue
+			elif line[0] == "v":
+				#add vertex
+				vertices[nextVertex] = (float(line[1]), float(line[2]), float(line[3]), 1.0)
+				nextVertex += 1
+				continue
+			elif line[0] == "vn":
+				#add normal
+				normals[nextNormal] = (float(line[1]), float(line[2]), float(line[3]))
+				nextNormal += 1
+				continue
+			elif line[0] == "vt":
+				#add texture coordinate
+				texCoords[nextTex] = (float(line[1]), 1 - float(line[2]))
+				nextTex += 1
+				continue
+			elif line[0] == "usemtl":
+				#set following faces parts to use the current material
+				curMaterial = line[1]
+				continue
+			elif line[0] == "g":
+				#Create a new section
+				curPart = line[1]
+				curFaces = []
+				parts[curPart] = (curFaces, mtls[curMaterial])
+			elif line[0] == "f":
+				vertexStart = tuple(map(lambda x: int(x), line[1].split("/")))
+				for i in range(2, len(line) - 1):
+					vertex2 = tuple(map(lambda x: int(x), line[i].split("/")))
+					vertex3 = tuple(map(lambda x: int(x), line[i + 1].split("/")))
+					curFaces.append((vertexStart, vertex2, vertex3))
+	#Reading file is over.
+	retval = []
+	for i in parts:
+		if i == "":
+			continue
+		faces = parts[i][0]
+		wholeVerts = {}
+		nextVertIndex = 0
 		vs = []
-		ns = []
-		sts = []
-		faces = []
-		with open(filePath, 'rU') as f:
-			for line in f:
-				oLine = line
-				line = line.split()
-				if len(line) == 0:
-					#Empty line. Unimportant
-					continue
-				if line[0].startswith('#'):
-					continue
-					#It's a comment. Skip it.
-				elif line[0] == 'mtllib':
-					
-					#Use this material. There will only be 1 in the files we're loading.
-					s = oLine[oLine.find('mtllib') + len('mtllib'):].strip()
-					print "Loading: \n\n" + s + "\n\n"
-					mtl = s
-				elif line[0] == 'v':
-					#A vertex
-					pos = numpy.array([float(line[1]), float(line[2]), float(line[3]), 1.0], dtype='f')
-					vs.append(pos.tolist())
-				elif line[0] == 'vn':
-					#A normal
-					ns.append([float(line[1]), float(line[2]), float(line[3])])
-				elif line[0] == 'vt':
-					#A texture coordinate
-					sts.append([float(line[1]), float(line[2])])
-				elif line[0] == 'f':
-					#A face. Assume triangle fan order
-					newline = []
-					for i in line[1:]:
-						newline.append(tuple(map(lambda x: int(x) - 1, i.split('/'))))
-					first = newline[0]
-					for i in range(1, len(newline) - 1):
-						faces.append(tuple([first, newline[i], newline[i+1]]))
-				elif line[0] == 'usemtl':
-					continue
-					#Ignore this for now
-				elif line[0] == 'g':
-					#Not important for us
-					continue
-		#Reading file is over.
-		self.vs = []
-		self.ns = []
-		self.sts = []
-		self.iList = []
-		#Break up faces to play nice with element array buffer
-		faceMap = {} #Will associate tuples of obj indices that correspond with a vertex in the final product
-		nextPos = 0
+		vts = []
+		vns = []
+		
+		indices = []
 		for face in faces:
-			for vertex in face:
-				if vertex in faceMap:
-					#We've already found it. Get the index
-					self.iList.append(faceMap[vertex])
-				else:
-					#It's new. Add a new index, and add the corresponding values to the correct lists
-					faceMap[vertex] = nextPos
-					self.iList.append(nextPos)
-					nextPos += 1
-					self.vs.append(vs[vertex[0]])
-					self.ns.append(ns[vertex[2]])
-					self.sts.append(sts[vertex[1]])
-		return mtl					
-	
-	def vertices(self):
-		return self.vs[:]
-		
-	def normals(self):
-		return self.ns[:]
-		
-	def texCoords(self):
-		return self.sts[:]
-		
-	def indices(self):
-		return self.iList[:]
-		
-	def skinColor(self):
-		return self.diffuseColor[:]
-		
-	def skinSpecColor(self):
-		return self.specularColor[:]
-	
-	#returns a map of material names to materials
-	
-	
-	def toFile(self, filePath):
-		v = ""
-		vn = ""
-		vt = ""
-		f = ""
-		curInd = 0
-		for i in chunks(self.iList, 3):
-			vertices = map(lambda x: self.vs[x], i)
-			normals = map(lambda x: self.ns[x], i)
-			texCoords = map(lambda x: self.sts[x], i)
-			for vertex in vertices:
-				vStr = 'v'
-				for coord in vertex[0:3]:
-					vStr += " " + str(coord)
-				vStr += '\n'
-				v += vStr
-			for normal in normals:
-				nStr = 'vn'
-				for comp in normal:
-					nStr += ' ' + str(comp)
-				nStr += '\n'
-				vn += nStr
-			for texCoord in texCoords:
-				tStr = 'vt'
-				for val in texCoord:
-					tStr += ' ' + str(val)
-				tStr += '\n'
-				vt += tStr
-				
-			f += 'f ' + '/'.join((str((curInd * 3) + 1) for i in range(3))) + ' ' + '/'.join((str((curInd * 3) + 2) for i in range(3))) + ' ' + '/'.join((str((curInd * 3) + 3) for i in range(3))) + '\n'
-			curInd += 1
-		with open(filePath, 'w') as file:
-			file.write(v + "\n" + vn + '\n' + vt + '\n' + f)
-			
+			for vert in face:
+				#pick apart a vertex
+				vertexInd = vert[0]
+				texCoordInd = vert[1]
+				normInd = vert[2]
+				#Have we seen the vertex before? If not, add it
+				if vert not in wholeVerts:
+					wholeVerts[vert] = nextVertIndex
+					nextVertIndex += 1
+					vs += list(vertices[vertexInd])
+					vts += list(texCoords[texCoordInd])
+					vns += list(normals[normInd])
+				#Whatever position it is, reference it by that
+				indices.append(wholeVerts[vert])
+		#Create a section object with this name, material, vertices, normals, texture coordinates, and indices, and stick it on the list of sections to return
+		retval.append(Section(i, parts[i][1], vs, vns, vts, indices))
+	return retval
 			
 if __name__ == "__main__":
 	#Do some testing/debugging stuff
 	path = "../../models/derp"
-	test = loadMaterial(path + ".mtl")
+	#path = "test"
+	test = loadModel(path + ".obj")
 	for i in test:
 		print i
-		print test[i]
 		raw_input("continue")
 	
 	

@@ -96,15 +96,17 @@ def genPerspective(vFov, aspect, near, far):
 class ObjWidget(QGLWidget):
 	# Any default values should be stored in the class
 
-	def __init__(self, model, highlighted = False, parent=None, aspectRatio=1.0):
+	def __init__(self, models, highlighted = False, parent=None, aspectRatio=1.0):
 		QGLWidget.__init__(self, parent)
-		self.data = model
-		self.vao = None
-		self.verts = None
+		
+		self.sections = models
+		
+		self.vaos = []
 		self.shaderProg = None
-		self.shaderVars={}
-		self.vertexComps = -1
-		self.indexBuffer = -1
+		self.attribIds = []
+		self.iBuffers = []
+		self.dTexIds = []
+		self.maskIds = []
 		self.aspect = aspectRatio
 		
 		#Various positioning data
@@ -114,6 +116,7 @@ class ObjWidget(QGLWidget):
 		self.yPan = 0
 		
 		self.MODEL_HEIGHT = 16.594
+		#self.MODEL_HEIGHT = 0.5
 		
 		#Various matrices
 		self.perspective = None #To be populated on resize
@@ -123,10 +126,9 @@ class ObjWidget(QGLWidget):
 		self.updateMatrices()
 
 		self.highlighted = highlighted
-
-		
-
-		
+	
+	def getData(self):
+		return self.sections
 
 	def highlight(self):
 		print "hello"
@@ -167,7 +169,7 @@ class ObjWidget(QGLWidget):
 		"Updates every matrix except projection, which will be updated on resize"
 		newMatrix = genIdentity()
 		#Center on the face
-		newMatrix = genTranslationMatrix(0, self.MODEL_HEIGHT * -.42, -0.66) * newMatrix
+		newMatrix = genTranslationMatrix(0, self.MODEL_HEIGHT * -0.42, -0.66) * newMatrix
 		newMatrix = genScaleMatrix(self.objScale, self.objScale, self.objScale) * newMatrix
 		newMatrix = genRotationMatrixY(self.yRotate) * newMatrix
 		newMatrix = genRotationMatrixX(self.xRotate) * newMatrix
@@ -187,7 +189,7 @@ class ObjWidget(QGLWidget):
 		#Don't call unloadData because it's about to unload anyway.
 		
 	def paintGL(self):
-		#For a test
+		#Set background color to denote selected or not selected
 		if self.highlighted:
 			GL.glClearColor(0.0, 0.5, 0.0, 1.0)
 		else:
@@ -197,18 +199,7 @@ class ObjWidget(QGLWidget):
 		
 		GL.glUseProgram(self.shaderProg)
 		
-		GL.glBindBuffer(GL.GL_ARRAY_BUFFER, self.vertexComps)
-		offset = 0
-		for i in self.attrs:
-			name, type, length, data = i
-			size = data.size * data.itemsize
-			varIndex = self.shaderVars[name]
-			if varIndex > -1:
-				GL.glEnableVertexAttribArray(varIndex)
-				GL.glVertexAttribPointer(varIndex, length, type, GL.GL_FALSE, 0, c_void_p(offset))
-			offset += size
-			
-		#Matrices
+		#Bind matrices, since they'll be the same for every object
 		loc = GL.glGetUniformLocation(self.shaderProg, 'uModelWorld')
 		if loc > -1:
 			GL.glUniformMatrix4fv(loc, 1, GL.GL_TRUE, numpy.array(self.modelToWorld))
@@ -221,27 +212,81 @@ class ObjWidget(QGLWidget):
 		loc = GL.glGetUniformLocation(self.shaderProg, 'uModelNormalCamera')
 		if loc > -1:
 			GL.glUniformMatrix3fv(loc, 1, GL.GL_TRUE, numpy.array(self.modelNormalToCamera))
-			
-		#Colors
-		loc = GL.glGetUniformLocation(self.shaderProg, 'skinColor')
-		if loc > -1:
-			data = numpy.array(self.data.skinColor(), dtype='float32')
-			GL.glUniform4fv(loc, 1, data)
-		loc = GL.glGetUniformLocation(self.shaderProg, 'skinSpecularColor')
-		if loc > -1:
-			data = numpy.array(self.data.skinSpecColor(), dtype='float32')
-			GL.glUniform4fv(loc, 1, data)
 		
-		GL.glBindBuffer(GL.GL_ELEMENT_ARRAY_BUFFER, self.indexBuffer)
-		GL.glDrawElements(GL.GL_TRIANGLES, #Topology
-			numpy.array(self.data.indices(), 'uint32').size, #Count in points
-			GL.GL_UNSIGNED_INT, #Type
-			None)
-		for i in self.attrs:
-			name = i[0]
-			varIndex = self.shaderVars[name]
-			if varIndex > -1:
-				GL.glDisableVertexAttribArray(varIndex)
+		#For each object in the scene
+		for i in range(len(self.vaos)):
+			#Bind Vertex attributes
+			GL.glBindVertexArray(self.vaos[i])
+			GL.glBindBuffer(GL.GL_ARRAY_BUFFER, self.attribIds[i])
+			offset = 0
+			loc = GL.glGetAttribLocation(self.shaderProg, "uModelPos")
+			if loc > -1:
+				GL.glEnableVertexAttribArray(loc)
+				GL.glVertexAttribPointer(loc, #which variable
+					4, #How many components?
+					GL.GL_FLOAT, #What type?
+					GL.GL_FALSE, #Normalize?
+					0, #Stride, that is, distance between consecutive entries
+					c_void_p(offset)) #Offset into the buffer
+			offset += self.sections[i].vertices.size * self.sections[i].vertices.itemsize
+			loc = GL.glGetAttribLocation(self.shaderProg, "uModelNormal")
+			if loc > -1:
+				GL.glEnableVertexAttribArray(loc)
+				GL.glVertexAttribPointer(loc, #which variable
+					3, #How many components?
+					GL.GL_FLOAT, #What type?
+					GL.GL_FALSE, #Normalize?
+					0, #Stride, that is, distance between consecutive entries
+					c_void_p(offset)) #Offset into the buffer
+			offset += self.sections[i].normals.size * self.sections[i].normals.itemsize
+			loc = GL.glGetAttribLocation(self.shaderProg, "uST")
+			if loc > -1:
+				GL.glEnableVertexAttribArray(loc)
+				GL.glVertexAttribPointer(loc, #which variable
+					2, #How many components?
+					GL.GL_FLOAT, #What type?
+					GL.GL_FALSE, #Normalize?
+					0, #Stride, that is, distance between consecutive entries
+					c_void_p(offset)) #Offset into the buffer
+			offset += self.sections[i].texPos.size * self.sections[i].texPos.itemsize
+			
+			#Bind material properties
+			loc = GL.glGetUniformLocation(self.shaderProg, 'ambientColor')
+			if loc > -1:
+				GL.glUniform4fv(loc, 1, self.sections[i].mtl.ambient)
+			loc = GL.glGetUniformLocation(self.shaderProg, 'diffuseColor')
+			if loc > -1:
+				GL.glUniform4fv(loc, 1, self.sections[i].mtl.diffuse)
+			loc = GL.glGetUniformLocation(self.shaderProg, 'specularColor')
+			if loc > -1:
+				GL.glUniform4fv(loc, 1, self.sections[i].mtl.specular)
+			loc = GL.glGetUniformLocation(self.shaderProg, 'specExp')
+			if loc > -1:
+				GL.glUniform1fv(loc, 1, self.sections[i].mtl.exponent)
+			loc = GL.glGetUniformLocation(self.shaderProg, 'dissolve')
+			if loc > -1:
+				GL.glUniform1fv(loc, 1, self.sections[i].mtl.dissolve)
+				
+			#Bind Textures
+			
+			loc = GL.glGetUniformLocation(self.shaderProg, 'textureMap')
+			if loc > -1:
+				GL.glUniform1i(loc, 0)
+			GL.glActiveTexture(GL.GL_TEXTURE0)
+			GL.glBindTexture(GL.GL_TEXTURE_2D, self.dTexIds[i])
+			
+			loc = GL.glGetUniformLocation(self.shaderProg, 'mask')
+			if loc > -1:
+				GL.glUniform1i(loc, 1)
+			GL.glActiveTexture(GL.GL_TEXTURE1)
+			GL.glBindTexture(GL.GL_TEXTURE_2D, self.maskIds[i])
+				
+			GL.glBindBuffer(GL.GL_ELEMENT_ARRAY_BUFFER, self.iBuffers[i])
+			GL.glDrawElements(GL.GL_TRIANGLES, #Topology
+				self.sections[i].indices.size, #how many vertices
+				GL.GL_UNSIGNED_INT, #Type
+				None)
+			
 		
 	def resizeGL(self, width, height):
 		self.perspective = genPerspective(50.0, float(width) / float(height), 0.1, 20.0)
@@ -251,59 +296,105 @@ class ObjWidget(QGLWidget):
 		QGLWidget.initializeGL(self)
 		GL.glEnable(GL.GL_DEPTH_TEST)
 		
-		
-		self.attrs = [('uModelPos', GL.GL_FLOAT, 4, numpy.array(self.data.vertices(), dtype='float32')),
-			('uST', GL.GL_FLOAT, 2, numpy.array(self.data.texCoords(), dtype='float32')),
-			('uModelNormal', GL.GL_FLOAT, 3, numpy.array(self.data.normals(), dtype='float32'))] #name, gl type, vector length, data
-			
 		self.loadShaders('../FaceView/objViewer/vert.glsl', '../FaceView/objViewer/frag.glsl')
 		self.loadData()
 		
 	def unloadData(self):
-		arr = numpy.array([self.vertexComps], dtype='uint32')
-		GL.glDeleteBuffers(1, arr)
-		self.vertexComps = -1
-		GL.glDeleteBuffers(1, numpy.array([self.indexBuffer], dtype='uint32'))
-		self.indexBuffer = -1
+		for i in range(0,len(self.vaos)):
+			GL.glBindVertexArray(self.vaos[i])
+			arr = numpy.array([self.attribIds[i]], dtype='uint32')
+			GL.glDeleteBuffers(len(arr), arr)
+			arr = numpy.array([self.iBuffers[i]], dtype='uint32')
+			GL.glDeleteBuffers(len(arr), arr)
+		arr = numpy.array([self.vaos], dtype='unit32')
+		GL.glDeleteVertexArrays(len(arr), arr)
+		self.vaos = []
+		self.attribIds = []
+		self.iBuffers = []
+			
 	
 	def reloadData(self):
 		self.unloadData()
 		self.loadData()
 	
 	def loadData(self):
-		self.vao = GL.glGenVertexArrays(1)
-		GL.glBindVertexArray(self.vao)
-		
-		totalSize = 0
-		for i in self.attrs:
-			data = i[3]
-			totalSize += data.size * data.itemsize
-		#Generate data buffer
-		self.vertexComps = GL.glGenBuffers(1)
-		GL.glBindBuffer(GL.GL_ARRAY_BUFFER, self.vertexComps)
-		
-		#Get memory
-		GL.glBufferData(GL.GL_ARRAY_BUFFER, totalSize, None, GL.GL_STATIC_DRAW)
-		
-		#Put vertices in buffer
-		offset = 0
-		for i in self.attrs:
-			data = i[3]
-			size = data.size * data.itemsize
+		for i in self.sections:
+			vao = GL.glGenVertexArrays(1)
+			self.vaos.append(vao)
+			GL.glBindVertexArray(vao)
 			
-			GL.glBufferSubData(GL.GL_ARRAY_BUFFER, #target
-				offset, #offset into the buffer to put the data
-				size, #size of data in bytes
-				data) #data
+			#Calculate how big the buffer needs to be
+			totalSize = 0
+			totalSize += i.vertices.size * i.vertices.itemsize
+			totalSize += i.normals.size * i.normals.itemsize
+			totalSize += i.texPos.size * i.texPos.itemsize
+			
+			#generate the vertex attribute buffer (VBO)
+			attribsId = GL.glGenBuffers(1)
+			self.attribIds.append(attribsId)
+			GL.glBindBuffer(GL.GL_ARRAY_BUFFER, attribsId)
+			
+			#Allocate the requisite space
+			GL.glBufferData(GL.GL_ARRAY_BUFFER, totalSize, None, GL.GL_STATIC_DRAW)
+			
+			#Put data in buffer
+			offset = 0
+			size = i.vertices.size * i.vertices.itemsize
+			GL.glBufferSubData(GL.GL_ARRAY_BUFFER, #Type
+				offset, #Offset into the buffer to put our data
+				size,   #How much data (in bytes) are we putting in?
+				i.vertices) #The data itself
 			offset += size
-		
-		#Generate index buffer
-		indices = numpy.array(self.data.indices(), dtype='uint32')
-		self.indexBuffer = GL.glGenBuffers(1)
-		GL.glBindBuffer(GL.GL_ELEMENT_ARRAY_BUFFER, self.indexBuffer)
-		GL.glBufferData(GL.GL_ELEMENT_ARRAY_BUFFER, indices.itemsize * indices.size, indices, GL.GL_STATIC_DRAW)
-		
-		
+			size = i.normals.size * i.normals.itemsize
+			GL.glBufferSubData(GL.GL_ARRAY_BUFFER,
+				offset,
+				size,
+				i.normals)
+			offset += size
+			size = i.texPos.size * i.texPos.itemsize
+			GL.glBufferSubData(GL.GL_ARRAY_BUFFER,
+				offset,
+				size,
+				i.texPos)
+			offset += size
+			
+			#Index buffer creation
+			indexBuffer = GL.glGenBuffers(1)
+			self.iBuffers.append(indexBuffer)
+			#Populate index buffer
+			GL.glBindBuffer(GL.GL_ELEMENT_ARRAY_BUFFER, indexBuffer)
+			GL.glBufferData(GL.GL_ELEMENT_ARRAY_BUFFER, i.indices.size * i.indices.itemsize, i.indices, GL.GL_STATIC_DRAW)
+			
+			#load textures
+			tex = GL.glGenTextures(1)
+			self.dTexIds.append(tex)
+			GL.glBindTexture(GL.GL_TEXTURE_2D, tex)
+			GL.glTexImage2D(GL.GL_TEXTURE_2D,
+				0, 
+				GL.GL_RGBA,
+				i.mtl.texSize[0],
+				i.mtl.texSize[1],
+				0,
+				GL.GL_RGBA,
+				GL.GL_UNSIGNED_BYTE,
+				i.mtl.diffuseTexture)
+			GL.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_LINEAR)
+			GL.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_LINEAR)
+			tex = GL.glGenTextures(1)
+			self.maskIds.append(tex)
+			GL.glBindTexture(GL.GL_TEXTURE_2D, tex)
+			GL.glTexImage2D(GL.GL_TEXTURE_2D,
+				0, 
+				GL.GL_RGBA,
+				i.mtl.maskSize[0],
+				i.mtl.maskSize[1],
+				0,
+				GL.GL_RGBA,
+				GL.GL_UNSIGNED_BYTE,
+				i.mtl.maskTexture)
+			GL.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_LINEAR)
+			GL.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_LINEAR)
+			
 	def loadShaders(self, vertexPath, fragmentPath):
 		if self.shaderProg is not None:
 			GL.glDeleteProgram(self.shaderProg)
@@ -322,7 +413,6 @@ class ObjWidget(QGLWidget):
 		#Compile vertex shader
 		GL.glShaderSource(vert, vertexText)
 		GL.glCompileShader(vert)
-		print os.getcwd()
 		if GL.glGetShaderiv(vert, GL.GL_COMPILE_STATUS) != GL.GL_TRUE:
 			raise RuntimeError("\n\nVertex Shader: " + GL.glGetShaderInfoLog(vert))
 		
@@ -344,14 +434,6 @@ class ObjWidget(QGLWidget):
 		GL.glDeleteShader(vert)
 		GL.glDeleteShader(frag)
 		self.shaderProg = prog
-		
-		for i in self.attrs:
-			name = i[0]
-			self.shaderVars[name] = GL.glGetAttribLocation(self.shaderProg, name)
-		for key, value in self.shaderVars.iteritems():
-			if value == -1:
-				print "Double check " + str(key)+ "."
-				print "It was not found, but it may have been optimized out of the shaders."
 				
 	def setHighlighted(self, hl):
 		self.highlighted = hl
@@ -360,8 +442,10 @@ class ObjWidget(QGLWidget):
 if __name__ == '__main__':
 	import objModel
 	import os
-	model = objModel.ObjModel('../../models/PC.354.obj')
-	app = QtGui.QApplication(["Thomas' "])
+	model = objModel.loadModel("../models/Sample 1.obj")
+	print model
+	#model = objModel.loadModel("objViewer/test.obj")
+	app = QtGui.QApplication(["Thomas' widget"])
 	widget = ObjWidget(model)
 	widget.resize(300, 300)
 	widget.highlight()
