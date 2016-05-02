@@ -108,7 +108,6 @@ if __name__ == '__main__':
 	import mh
 	import skeleton
 	import log
-
 	#application.loadPlugin("plugins/9_export_obj")
 
 	#dummy out the functionality from MakeHuman that we don't need
@@ -147,6 +146,20 @@ if __name__ == '__main__':
 
 	import humanmodifier
 	humanmodifier.loadModifiers("data/modifiers/modeling_modifiers.json", buddy)
+	import proxy
+	print os.getcwd()
+	sys.stdout = stdout
+	buddyProxy = proxy.loadProxy(buddy, os.path.join(os.getcwd(), 'data', 'eyes', 'low-poly', 'low-poly'), 'Eyes')
+	print
+	mesh, obj = buddyProxy.loadMeshAndObject(buddy)
+	print
+	
+	buddy.setEyesProxy(buddyProxy)
+	mesh = obj.getSeedMesh()
+	
+	sys.stdout = f
+	
+	
 	mods = []
 	cats = []
 	acceptableModGroups = [0, 1, 2, 7, 9, 12, 17, 18, 21]
@@ -167,8 +180,6 @@ if __name__ == '__main__':
 		samples = []
 		#syntax for parameter passing is 
 		# <name>:<value between 0 and 1>\n
-		
-		#TODO in later update: make parsing more robust
 		params = {}
 		modDict = {}
 		
@@ -195,6 +206,8 @@ if __name__ == '__main__':
 					val = 0
 				params[components[0]] = val
 		sys.stdout = stdout
+		print os.getcwd()
+		#TODO figure out eyes
 		import mh2obj
 		ObjConfig = __import__('9_export_obj').ObjConfig
 		conf = ObjConfig()
@@ -219,6 +232,12 @@ if __name__ == '__main__':
 					val += mod.getMin()
 					modDict[key].setValue(val)
 			buddy.applyAllTargets()
+			
+			#Put proxy objects in the right place
+			buddyProxy.update(mesh, False)
+			mesh.update()
+			obj.setSubdivided(buddy.isSubdivided())
+			
 			name = 'default'
 			if params.has_key('name'):
 				name = params['name']
