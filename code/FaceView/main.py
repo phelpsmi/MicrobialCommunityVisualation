@@ -1,7 +1,6 @@
 from PyQt4 import QtCore
 from PyQt4 import QtGui
-import sys
-import os
+import sys, os, sip
 
 sys.path.append('./gui-scripts')
 
@@ -13,9 +12,10 @@ def loadLoading():
     app = QtGui.QApplication(sys.argv)
     loading_app = LoadingInterface.loadingWindow()
     loading_app.show()
-    app.exec_()
+    sys.exit(app.exec_())
         
 
 if __name__=="__main__":
+    sip.setdestroyonexit(False)
     loadLoading()
 
