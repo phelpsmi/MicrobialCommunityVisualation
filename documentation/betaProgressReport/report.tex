@@ -144,6 +144,9 @@ Additionally, the obj viewer widget proved challenging simply because the the er
 
 For Michael, the most difficult problem was figuring out how to properly transition between the three interfaces and using PyQt in general, as he had never used any GUI libraries before. The main difficulty came with Qt's poor functionality when trying to control multiple separate windows without having a main central window. Additionally, there was a great deal of difficulty in making sure all of the libraries used in the code were in sync with what Thomas had.
 
+Towards the end of the project, we had a lot of trouble solving a bug with python hanging every time the user attempted to close the process. Many different solutions were attempted using various signal handling and attempted garbage cleanup without achieving any decent results. The only working solution that we found was to change a setting in python's own garbage collection. This could potentially lead to problems with memory but we have no reason to believe that it would so we felt it was worth the risk in order to avoid this unwanted process hanging and crashing.
+
+
 \section{Interesting Code} \label{interestingCode}
 
 \subsection{fvParser} 
