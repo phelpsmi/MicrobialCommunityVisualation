@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (preloaded format=pdflatex 2016.2.8)  4 MAY 2016 15:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (preloaded format=pdflatex 2016.2.8)  5 MAY 2016 17:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -717,72 +717,61 @@ LaTeX Font Info:    Try loading font information for OT1+pcr on input line 135.
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) (./fvParser.py)
 [6]
-
-LaTeX Warning: Reference `rWork' on page 7 undefined on input line 172.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 196--196
+Underfull \hbox (badness 10000) in paragraph at lines 194--194
 []|\OT1/ptm/m/n/10 Average
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 196--196
+Underfull \hbox (badness 10000) in paragraph at lines 194--194
 []|\OT1/ptm/m/n/10 ``Medium''
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 196--196
+Underfull \hbox (badness 10000) in paragraph at lines 194--194
 []|\OT1/ptm/m/n/10 ``Don't
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 196--196
+Underfull \hbox (badness 10000) in paragraph at lines 194--194
 []|\OT1/ptm/m/n/10 ``Medium''
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 196--196
+Underfull \hbox (badness 10000) in paragraph at lines 194--194
 []|\OT1/ptm/m/n/10 ``Confident''
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 196--196
+Underfull \hbox (badness 10000) in paragraph at lines 194--194
 []|\OT1/ptm/m/n/10 ``Confident''
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 196--196
+Underfull \hbox (badness 10000) in paragraph at lines 194--194
 []|\OT1/ptm/m/n/10 ``Confident''
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 196--196
+Underfull \hbox (badness 10000) in paragraph at lines 194--194
 []|\OT1/ptm/m/n/10 ``Maybe''
  []
 
-[7] [8] [9] (./report.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+[7] [8] [9] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 14371 strings out of 493042
- 234014 string characters out of 6138228
+ 14370 strings out of 493042
+ 234007 string characters out of 6138228
  374812 words of memory out of 5000000
- 17673 multiletter control sequences out of 15000+600000
+ 17672 multiletter control sequences out of 15000+600000
  40966 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,10n,72p,1010b,1361s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2015/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2015/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2015/texmf-dist/fonts/type1/
-urw/courier/ucrr8a.pfb><c:/texlive/2015/texmf-dist/fonts/type1/urw/times/utmb8a
-.pfb><c:/texlive/2015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2
-015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (9 pages, 421367 bytes).
+ 38i,10n,72p,1009b,1361s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r
+.enc}<c:/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/
+texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/20
+15/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2015/texmf-dist/fo
+nts/type1/urw/times/utmb8a.pfb><c:/texlive/2015/texmf-dist/fonts/type1/urw/time
+s/utmr8a.pfb><c:/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on report.pdf (9 pages, 420404 bytes).
 PDF statistics:
  66 PDF objects out of 1000 (max. 8388607)
  42 compressed objects within 1 object stream
