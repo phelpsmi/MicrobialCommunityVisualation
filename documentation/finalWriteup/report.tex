@@ -1,0 +1,102 @@
+%ten point, letter paper, single column
+\documentclass[letterpaper,10pt, onecolumn, draftclsnofoot]{IEEEtran}
+
+\usepackage{graphicx}                                        
+\usepackage{amssymb}                                         
+\usepackage{amsmath}                                         
+\usepackage{amsthm}                                          
+
+\usepackage{alltt}                                           
+\usepackage{float}
+\usepackage{color}
+\usepackage{fancyvrb}
+\usepackage{url}
+
+\usepackage{balance}
+\usepackage[TABBOTCAP, tight]{subfigure}
+\usepackage{enumitem}
+\usepackage{pstricks, pst-node}
+\usepackage{listings}
+\usepackage{tabularx}
+
+\usepackage{geometry}
+%0.75 in margin on each side, total of 1.5 in
+\geometry{textheight=8.5in, textwidth=6in}
+
+%random comment
+
+\newcommand{\cred}[1]{{\color{red}#1}}
+\newcommand{\cblue}[1]{{\color{blue}#1}}
+
+\newcommand{\toc}{\tableofcontents}
+
+%\usepackage{hyperref}
+
+\def\name{Thomas Albertine}
+\title{The Many Faces of Microbial Communities \\\large Senior Design\\Final Report\\}
+\author{\name, Michael Phelps}
+
+
+%% The following metadata will show up in the PDF properties
+% \hypersetup{
+%   colorlinks = false,
+%   urlcolor = black,
+%   pdfauthor = {\name},
+%   pdfkeywords = {capstone visualization microbiology microbio senior design},
+%   pdftitle = {Senior Design Project, Visualizing Microbial Communities},
+%   pdfsubject = {Senior Design Microbiology Visualizations},
+%   pdfpagemode = UseNone
+% }
+
+\lstset{language=python,
+                basicstyle=\ttfamily,
+                keywordstyle=\color{blue}\ttfamily,
+                stringstyle=\color{red}\ttfamily,
+                commentstyle=\color{green}\ttfamily,
+                morecomment=[l][\color{magenta}]{\#},
+				breaklines=true,
+				showstringspaces=false
+}
+
+\parindent = 0.0 in
+\parskip = 0.1 in
+
+%Single space
+\linespread{1.0}
+
+\input{pygments.tex}
+
+\begin{document}
+\maketitle
+\section*{Introduction}
+
+\clearpage
+
+\tableofcontents
+
+\section*{Original Requirements Document}
+
+\section*{Final Requirements Document}
+
+\section*{Design Document}
+
+\section*{Tech Review}
+
+\section*{Blog Posts}
+
+\section*{Poster}
+
+\section*{Project Documentation}
+
+\section*{Learning New Technologies}
+
+\section*{Personal Learning}
+\subsection*{Thomas Albertine}
+
+\subsection*{Michael Phelps}
+
+\appendix[Essential Code Listings]
+
+\appendix[Additional Content]
+
+\end{document}

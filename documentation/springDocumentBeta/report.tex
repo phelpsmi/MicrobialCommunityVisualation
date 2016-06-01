@@ -87,7 +87,7 @@ To that effect, our project loads population data from files in supported format
 
 \begin{figure}
 	\includegraphics[width=\textwidth]{analysis.PNG}
-	\caption{Several models generated from a sample data file. This file had few enough organisms that only some features were modified. The rest were left at their default values to avoid distracting from the significant features of the data set. This image was generated using the obj viewer widget that Thomas wrote and the analysis view page that Michael wrote.}
+	\caption{Several models generated from a sample data file. This file had few enough organisms that only some features were modified. The rest were left at their default values to avoid distracting from the significant features of the data set. This image was generated using our obj viewer widget and the analysis view page.}
 	\label{fig:generated}
 \end{figure}
 
@@ -119,7 +119,7 @@ The Main Selection page (see Figure \ref{fig:MainInterface}) will allow users to
 
 \section{Significant Problems and Associated Solutions}
 
-One of the most difficult problem that we faced was trying to read and decypher the MakeHuman code enough to write the wrapper. Since Python is loosely typed, he couldn't match the types to see how things were being used. Instead, we walked through the code, jumping from function definition to function definition, searching through multiple files. Eventually, we remembered that Python objects have a dictionary of their attributes, so we were able to import MakeHuman modules and examine the the contents of objects returned from functions which sped up the process considerably. Additionally, we learned how to use grep-like functionality from within PowerShell, which made it much easier to look for function definitions.
+One of the most difficult problem that we faced was trying to read and decypher the MakeHuman code enough to write the wrapper. Since Python is loosely typed, we couldn't match the types to see how things were being used. Instead, we walked through the code, jumping from function definition to function definition, searching through multiple files. Eventually, we remembered that Python objects have a dictionary of their attributes, so we were able to import MakeHuman modules and examine the the contents of objects returned from functions which sped up the process considerably. Additionally, we learned how to use grep-like functionality from within PowerShell, which made it much easier to look for function definitions.
 
 Additionally, the obj viewer widget proved challenging because the the error policy for OpenGL is to fail silently and not draw anything. Most of this can be mitigated by occasional calls to $glGetError()$ Some mistakes however, are not technically errors, but still don't produce the intended output.
 
