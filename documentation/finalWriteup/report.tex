@@ -22,6 +22,7 @@
 \usepackage{geometry}
 %0.75 in margin on each side, total of 1.5 in
 \geometry{textheight=8.5in, textwidth=6in}
+\usepackage{pgfgantt}
 
 %random comment
 
@@ -82,6 +83,37 @@ Currently, the standard visualizations are pie charts or heat maps. Unfortunatel
 Our team consisted of Thomas Albertine and Michael Phelps. We had no formal roles aside from ``developer'', although generally (but not exclusively) Thomas worked on the backend code, loading data files and generating models, while Michael worked on the frontend code, connecting the backend to a user interface (henceforth referred to as UI). Our client played a hands off role. We spoke with her early in the project to collect requirements and have contacted her to revisit requirements or to keep her aprised of how the project is going, but she generally gave usa lot of freedom regarding how to proceed.
 
 \section{Original Requirements Document}
+\subsection{Gantt Chart}
+\begin{figure}[h]
+	\begin{ganttchart}[vgrid={*1{black, dotted}}]{1}{21}
+		\gantttitle{Initial Gantt Chart in Weeks}{21}\\
+		\gantttitlelist{1,...,21}{1}\\
+		
+		%\ganttbar{Task Name}{start}{end}[name] \\
+		%\ganttlink{name1}{name2 defaults to elem1 or the like}
+		\ganttbar[name=fformats]{Explore File Formats}{1}{2} \\
+		\ganttbar[name=exploremhuman]{Explore MakeHuman API}{1}{4} \\
+		\ganttbar[name=lfile]{Load File}{3}{3}\\
+		\ganttbar[name=mhumanwrapper]{MakeHuman Wrapper}{5}{8}\\
+		\ganttbar[name=ui]{Basic UI}{9}{10}\\
+		\ganttbar[name=ldmodel]{Load and Draw Model}{11}{14}\\
+		\ganttbar[name=rpsmodel]{Rotate / Pan / Scale Model}{15}{16}\\
+		\ganttbar[name=polish]{Polish UI}{17}{21}\\
+		\ganttbar[name=expfsprt]{Expand File Type Support}{17}{21}\\
+		
+		\ganttlink{fformats}{lfile}
+		\ganttlink{lfile}{mhumanwrapper}
+		\ganttlink{exploremhuman}{mhumanwrapper}
+		\ganttlink{mhumanwrapper}{ldmodel}
+		\ganttlink{ui}{ldmodel}
+		\ganttlink{ui}{polish}
+		\ganttlink{ldmodel}{rpsmodel}
+		\ganttlink{rpsmodel}{polish}
+	\end{ganttchart}
+	\caption{This is the original Gantt chart for the project.}
+\end{figure}
+
+\subsection{Document}
 
 \section{Final Requirements Document}
 
