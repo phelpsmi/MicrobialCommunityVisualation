@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (preloaded format=pdflatex 2016.2.8)  2 JUN 2016 18:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (preloaded format=pdflatex 2016.2.8)  2 JUN 2016 22:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -970,24 +970,36 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  [2
 
-] [3] [4]
-(./report.aux) ) 
+]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[3] [4] <functional.PNG, id=22, 188.20313pt x 131.74219pt>
+File: functional.PNG Graphic file (type png)
+
+<use functional.PNG>
+Package pdftex.def Info: functional.PNG used on input line 164.
+(pdftex.def)             Requested size: 173.44534pt x 121.42137pt.
+ [5 <./functional.PNG>] [6] [7] [8] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 20558 strings out of 493042
- 391483 string characters out of 6138228
- 498391 words of memory out of 5000000
- 23689 multiletter control sequences out of 15000+600000
+ 20572 strings out of 493042
+ 391680 string characters out of 6138228
+ 499391 words of memory out of 5000000
+ 23701 multiletter control sequences out of 15000+600000
  36844 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 61i,10n,72p,639b,793s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/tex
-live/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2015/texmf-di
-st/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2015/texmf-dist/fonts/type1/urw
-/times/utmri8a.pfb>
-Output written on report.pdf (4 pages, 47807 bytes).
+ 61i,9n,72p,747b,791s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2015/texmf-dist
+/fonts/enc/dvips/base/8r.enc}<c:/texlive/2015/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr10.pfb><c:/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy10.pfb><c:/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+<c:/texlive/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2015/t
+exmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2015/texmf-dist/fonts/ty
+pe1/urw/times/utmri8a.pfb>
+Output written on report.pdf (8 pages, 92295 bytes).
 PDF statistics:
- 33 PDF objects out of 1000 (max. 8388607)
- 23 compressed objects within 1 object stream
+ 62 PDF objects out of 1000 (max. 8388607)
+ 43 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
 
