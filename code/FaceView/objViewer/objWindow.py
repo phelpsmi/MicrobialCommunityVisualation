@@ -145,8 +145,8 @@ class ObjWidget(QGLWidget):
 	def rotate(self, x, z):
 		if z > 360 or z < 0:
 			z = z % 360
-		if x > 180:
-			x = 90
+		if x > 70:
+			x = 70
 		if x < -90:
 			x = -90
 		self.xRotate = x

@@ -31,23 +31,23 @@
 
 \newcommand{\toc}{\tableofcontents}
 
-%\usepackage{hyperref}
+\usepackage{hyperref}
 
 \def\name{Thomas Albertine}
 \title{The Many Faces of Microbial Communities \\\large Senior Design\\Spring Term Final Report\\}
 \author{\name, Michael Phelps}
 
 
-%% The following metadata will show up in the PDF properties
-% \hypersetup{
-%   colorlinks = false,
-%   urlcolor = black,
-%   pdfauthor = {\name},
-%   pdfkeywords = {capstone visualization microbiology microbio senior design},
-%   pdftitle = {Senior Design Project, Visualizing Microbial Communities},
-%   pdfsubject = {Senior Design Microbiology Visualizations},
-%   pdfpagemode = UseNone
-% }
+% The following metadata will show up in the PDF properties
+ \hypersetup{
+   colorlinks = false,
+   urlcolor = black,
+   pdfauthor = {\name},
+   pdfkeywords = {capstone visualization microbiology microbio senior design},
+   pdftitle = {Senior Design Project, Visualizing Microbial Communities},
+   pdfsubject = {Senior Design Microbiology Visualizations},
+   pdfpagemode = UseNone
+ }
 
 \lstset{language=python,
                 basicstyle=\ttfamily,
@@ -258,7 +258,7 @@ This feature would allow users to save and load visualization profiles, configur
 \subsection{Final Gantt Chart}
 \begin{figure}[h!]
 	\begin{ganttchart}[vgrid={*1{black, dotted}}]{1}{30}
-		\gantttitle{Initial Gantt Chart in Weeks}{30}\\
+		\gantttitle{Final Gantt Chart in Weeks}{30}\\
 		\gantttitlelist{1,...,30}{1}\\
 		
 		%\ganttbar{Task Name}{start}{end}[name] \\
@@ -677,8 +677,143 @@ We're basically done with the project, which is good because expo is next Friday
 
 
 \section{Project Documentation}
+\subsection{How does the project work?}
+\subsubsection{Structure}
+
+There are five primary components of our application. They are the File Loader, the Model Generator Translator, the Model Generator, the Model Loader, and the Frontend. Figure \ref{fig:structure2} provides an overview of the relationships between the components.
+
+ \begin{figure}[h]
+	\includegraphics[width=\textwidth]{structure.PNG}
+	\caption{A flowchart representing the general structure of the project.}
+	\label{fig:structure2}
+\end{figure}
+
+As described in the figure, various formats of population data are loaded into the program through the File Loader. The File Loader splits the data file and metadata file into population data and sample groupings data, which are sent to the Model Generator Translator and Frontend respectively. From the Frontend, the user provides a mapping of model parameters (such as head shape, nose length, etc.) as well as information on how to normalize the data sent to the Model Generator Translator. The Model Generator Translator takes the mappings, population data, and normalization data and uses it to create parameters for the model generator. These parameters, which are simply pairs of model parameters with corresponding numbers between zero and 1, are sent to the Model Generator which uses them to customize a 3d model of a human. This model is saved in obj format in a designated folder. The Model generator can function as a standalone program, so when it finishes, the original program can stop waiting and begin loading those models. Those models are then presented to the user as the visualization.
+
+\subsubsection{Theory of Operation}
+Within each general component, there is still room for explanation.
+
+The File Loader is composed of a registry object that contains several file loader objects. In the registry, each file loader object is associated with a file type (by file extension) in order to support multiple population data formats. Each can accept a population data file as well as an optional metadata file. When the file loader object is finished, it outputs a list of sample objects, as well as a list of group objects, which are simply lists of sample objects with some comparison functionality built in. The group objects are sent to the frontend so the user can select by group, or modify groups. The population data, on the other hand, is sent to the model generator so it chan be transformed into model generation parameters.
+
+Before that however, the Data-Model Parameter Mappings and normalization data must be provided by the user. The user enters this data through the screen showed in Figure \ref{fig:loadingmockup2}. Each organism in the file can be associated with a model parameter from our selection of 138 parameters which we pull from the Model Generator on program startup. Of course, not every organism or model parameter needs to be associated with anything. In that case, no mapping entry is created for that organism or parameter. 
+
+\begin{figure}[h]
+	\includegraphics[width=\textwidth]{loadMenu.PNG}
+	\caption{A mockup of the UI for loading a file containing three organisms and 256 samples, to be normalized with a maximum value of 42}
+	\label{fig:loadingmockup2}
+\end{figure}
+
+Normalization information is fairly simple. There are three options. The first is that the data is normalized in absolute mode, which means that only the organism that has the highest population in the entire file will end up with a model parameter value of one, and all other parameters are scaled such that the proportions remain the same. This is good for comparing total populations of an organism between samples in a file. 
+
+The second option is ratio mode. In this case, the organism with the highest population in each sample will have a model parameter value of one, scaling other organisms in the sample to maintain the proportions. This is good for comparing the ratios of a population between samples. 
+
+The third option is manual mode. In this case, the value which all samples are divided by can be set by the user, allowing the user to compare samples with other samples of which they may have visualized before and taken screenshots. This mode runs the risk that the normalization value is not high enough. If that happens, the model parameters would come out to be greater than one, which isn't supported by our model generator. In this case, the value would be restricted to the range zero to one. We warn the user of this in the menu.
+
+Once the data is loaded and the mappings and normalization information are chosen, the Model Generator translator can create the Model Generation Parameters. This process is relatively simple and done for each sample. For each organism in the sample, create a new entry. This entry's name should be the value that is mapped to the organism's name in the Data-Model Parameter Mapping. The value should be the population divided by the normalization value for the sample. Each sample's entries are delineated by a short message. The resulting parameter list is turned into a string and fed into the Model Generator's stdin.
+
+The Model Generator was created to be a standalone program if necessary, in order to facilitate the web UI stretch goal. As such, it receives its input as console arguments and from stdin. It has two pieces of functionality. As mentioned before, the first function is to list the model parameters that it supports. That functionality is available by using a flag during invocation. Its main functionality however, is to read in the list of model parameters, and generate 3d human models based on those parameters. It does this by reading in the parameters, creating one parameter set for each group delineated by the message mentioned earlier. For each of these parameter sets, a MakeHuman human object is created. Each parameter is then applied to the human, and additional features (eyes, for example) are added before refreshing and updating the human. Then the human is exported to obj format and saved to a file in a designated folder, before resetting the human and moving on to the next parameter set.
+
+When the Model Generation runs out of parameter sets, that program terminates, allowing the original program to continue. At that point the Model Loader is invoked, which loads the models and supports all of the necessary features of the Wavefront OBJ format. In terms of the geometry specification, it supports vertices, normal vectors, texture coordinates, faces, groups, and multiple materials. In terms of materials, it supports rgb colors for ambient, diffuse, and specular lighting components, as well as texture mapping. The Model Loader is closely tied to the OBJ viewer widget, which uses OpenGL to render the 3d models loaded here.
+
+The OBJ viewer widget works with the Qt library. It performs initialization tasks in the initializeGL function, including loading and compiling shaders, and loading the data from the model objects into one vertex buffer object per group (using element array buffers for minimal duplication). For ease of use in the UI, it also provides functionality to create transformation matrices to rotate, scale, and translate models, as well as functions to generate those matrices from inputs that are easier to understand, such as rotating by some angle around an axis. At each draw cycle, for each group, updated uniform variables (such as those matrices) are rebound before calling glDrawElements to draw to the screen.
+
+\begin{figure}[h]
+	\includegraphics[width=\textwidth]{thumbnailMenu.PNG}
+	\caption{A mockup of the thumbnail view.}
+	\label{fig:thumbnail2}
+\end{figure}
+
+These models are associated with their original samples, so that they can be associated with the groups sent to the frontend initially. From there, they are shown to the user. Besides the file loading and parameter mapping screen, there are two additional screens. The first (Figure \ref{fig:thumbnail2}) is the thumbnail view, which allows user to quickly examine all of their samples and select some to analyze by clicking on them, as well as to select models by group.
+
+The second screen is the analysis screen (Figure \ref{fig:analysis2}), which allows users to view the visualizations in more detail. Users can rotate the models to see the different features more clearly, and we provide buttons for commonly used camera positions. Specifically, we provide left and right side views, a front view, and a 3/4 view (directly looking at the model's left temple). Additionally, we provide a table containing the current mappings, so the user can easily see which organisms correspond to which features.
+
+\begin{figure}[h]
+	\includegraphics[width=\textwidth]{analysisMenu.PNG}
+	\caption{A mockup of the analysis view.}
+	\label{fig:analysis2}
+\end{figure}
+
+\subsection{Installation Instructions}
+\label{sec:Installation Instructions}
+As our project is written in Python, the program does not need installation itself, but there are some modules that you may have to install. In addition to standard modules packaged with Python, our project uses the following:
+
+\begin{itemize}
+	\item PyOpenGL
+	\item Numpy
+	\item Pillow
+	\item PyQt4
+\end{itemize}
+
+PyOpenGL is a module that allows us to use the OpenGL graphics library to render the models. Numpy is a library that allows us to use lower level data structures for performance and to better interface with PyOpenGL. Pillow is a Python image library that we use to load textures. Specifically, we use it to load the texture on the eyes. Finally, PyQt4 is the library we use for our UI.
+
+To install the first 3 modules is as simple as opening a command prompt and typeing ``pip install'' followed by the name of the module. Due to its license, PyQt4 is not available through Pip, so instead, you can use one of the installers found at \href{https://www.riverbankcomputing.com/software/pyqt/download}{riverbankcomputing.com}.
+
+\subsection{How to Run}
+\label{sec:How to Run}
+
+After downloading our application, ther are a few options. If you have Python 2.7 associated with ``.py'' files, simply navigate to our project directory, then open the folder ``FaceView''. From there you can double click on ``main.py'' and the application should launch.
+
+If you do not have Python 2.7 associated with ``.py'' files, you need to open a command prompt (or PowerShell) in that folder. Then run ``python main.py'', which should launch the application.
+
+If it does not run, then it is possible that you do not have the correct version of Python installed, or you are using a different Python version by default.
+
+\subsection{Additional Requirements}
+To our knowledge, our project does not have any additional requirements.
+
+\subsection{User Guide}
+Hello and welcome to the FaceView Population Visualization Tool. Before we begin, please refer to sections \ref{sec:Installation Instructions} and \ref{sec:How to Run} to make sure that you are prepared to run this application.
+
+Now that you have the application running, begin by clicking the button to select a data file. This allows you to choose which data file to visualize. For your convenience, we've included ``trivial.otu'' for demonstration purposes.
+
+After selecting a data file, please click the button to select a metadata file, located just below the prevous button. This will allow you to select a metadata file containing sample groupings. We've included ``trivial.csv'' for your convenience, and debugging purposes.
+
+After loading one of each file, the table should be populated with the organisms in your data file, on the left, and a drop down menu on the right. If you click the drop down menu, you should see a list of model parameters, by selecting one, you are associating that parameter with an organism in each sample. That is, a large population of that organism with make that feature more pronounced, whereas a small population would make it less pronounced. 
+
+Please choose some associations now. We have noticed that parameters associated with the chin or head shape tend to be the most intuitive and the easiest to see and compare.
+
+Now please take a moment to look at the upper right corner of the window. The normalization options scale your data so that the visualizations can show the whole picture. There are three options. ``Absolute'' normalizes your data in terms of the whole file. That is, every population count is scaled by the largest population in the file. That way, the relationship between the populations in the file are the same, but it is on a scale that our application can draw effectively. This mode is good for comparing the total population of an organism between multiple samples.
+
+The second mode is ``Ratio'' mode, in which populations are scaled based on the largest population in the sample. This scheme is best for comparing the proportional makeup of a population, since the ratios within the sample are preserved.
+
+The third normalization scheme is ``Manual'' in which you can set the normalization value. In this scheme, all of the populations are divided by the value you provide. For the purposes of this calculation, the final values must be between zero and one. Any values outside this range will be clamped to one of the edges, so be careful.
+
+Now that all of the optoins are configured, please click the generate button, and the application will generate 3d models of human faces that represent your data. It may take a moment, so please be patient.
+
+At this point, I'd like to point out that if you don't like your selection thus far, each page has a back button, which will allow you to return to hte previous page with all of your settings maintained, so you can easily modify the parameters to fit your needs.
+
+By the time the next window appears, the models will have finished generating and loading, and should be visible on your screen. At this point you can select them manually by clicking on them, or you can use the buttons on the right to select them by groups. If you had groups in your metadata file, you should have some groups in the drop down by default. In any case, can use those buttons to create groups, and samples to a group, remove samples from a group, or delete groups entirely (don't worry, the samples will remain). Please select some samples, and then click the button labelled ``Analysis View''
+
+You should now see the analysis view. On the left, your selected samples should appear. You can click and drag them to rotate around the model to view the features you modified. On the right you should see several buttons at the top. These will move the camera to one of several common camera positions. Also on the right is a table containing the mapping between organisms and facial features that you created earlier.
 
 \section{Learning New Technologies}
+
+\subsection{Web Sites}
+
+\subsubsection{Stack Overflow}
+This answer may be the most obvious, but it was exceptionally helpful. If I searched for a question on Google, Stack Overflow was usually the first result. It's not a specialized resource, but it provides good advice and explanation on a wide variety of topics.
+
+\url{http://stackoverflow.com/}
+
+\subsubsection{Python Online Documentation}
+
+Since our project was written in Python, it's obvious that the Python documentation would be useful. Again, it was more of a general resources, but still provided enough depth to get some good information.
+
+\url{https://docs.python.org/2.7/}
+
+\subsubsection{Qt 4.8 Documentation}
+As we mentioned, our application is written using the PyQt4, which is a Python wrapper around the Qt UI library. Since the naming conventions were the same, we were able to read the Qt documentation to find out about the corresponding functionality in PyQt, but the Qt documentation was searchable, and easier to read.
+
+\url{http://doc.qt.io/qt-4.8/}
+
+\subsubsection{opengl-tutorial.org}
+This site was a bit more specialized. It was a good refresher for how to work with OpenGL after not doing so for approximately a year. 
+
+\url{http://www.opengl-tutorial.org/}
+
+\subsubsection{QIIME Documentation}
+This is the web site for the program that first used QIIME format, which we support. In the documentation, we found an explanation for the file format itself, which proved very helpful.
+
+\url{http://qiime.org/documentation/index.html}
 
 \section{Personal Learning}
 \subsection{Thomas Albertine}
