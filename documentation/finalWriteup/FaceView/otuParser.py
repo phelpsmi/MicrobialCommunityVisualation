@@ -1,7 +1,3 @@
-import sample
-import grouping
-import os
-import csv
 
 class OtuParser:
 	def parseFile(self, filePath, metaPath):

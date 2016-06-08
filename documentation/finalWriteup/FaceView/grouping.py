@@ -1,15 +1,4 @@
 
-#grouping.py
-#By Thomas Albertine
-
-#Backend for users to add and modify groups of samples
-#Needs to be able to do the following
-#  - Add samples to a group (as multiple selected samples)
-#  - Remove samples from a group (as multiple selected samples)
-#  - Keep track of all the groups
-#  - Easily reset when new groups are created
-
-# Represents each individual group
 class Group:
 	
 	def __init__(self, name, samples=[]):

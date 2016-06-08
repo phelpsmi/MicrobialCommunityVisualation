@@ -1,11 +1,3 @@
-import os
-
-#minimum functions required for a parser.
-#Should also register itself with the parser registry
-#Returns list of samples and a list of groups
-class minParser:
-	def parseFile(self, filePath, metaPath):
-		"noop"
 
 #The parser registry
 class parserRegistry:

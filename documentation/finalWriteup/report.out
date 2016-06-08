@@ -109,6 +109,17 @@
 \BOOKMARK [3][-]{subsubsection.10.1.5}{QIIME Documentation}{subsection.10.1}% 109
 \BOOKMARK [1][-]{section.11}{Personal Learning}{}% 110
 \BOOKMARK [2][-]{subsection.11.1}{Thomas Albertine}{section.11}% 111
-\BOOKMARK [2][-]{subsection.11.2}{Michael Phelps}{section.11}% 112
-\BOOKMARK [1][-]{section*.2}{Appendix: Essential Code Listings}{}% 113
-\BOOKMARK [1][-]{section*.3}{Appendix: Additional Content}{}% 114
+\BOOKMARK [3][-]{subsubsection.11.1.1}{Technical Information}{subsection.11.1}% 112
+\BOOKMARK [3][-]{subsubsection.11.1.2}{Non-Technical Information}{subsection.11.1}% 113
+\BOOKMARK [3][-]{subsubsection.11.1.3}{Regarding Project Work}{subsection.11.1}% 114
+\BOOKMARK [3][-]{subsubsection.11.1.4}{Regarding Project Management}{subsection.11.1}% 115
+\BOOKMARK [3][-]{subsubsection.11.1.5}{Regarding Working in Teams}{subsection.11.1}% 116
+\BOOKMARK [3][-]{subsubsection.11.1.6}{What I Would Do Differently, If I Did It Again}{subsection.11.1}% 117
+\BOOKMARK [2][-]{subsection.11.2}{Michael Phelps}{section.11}% 118
+\BOOKMARK [1][-]{section*.2}{Appendix: Essential Code Listings}{}% 119
+\BOOKMARK [2][-]{subsubsection.Appendix.A.0.1}{fvParser.py}{section*.2}% 120
+\BOOKMARK [3][-]{subsubsection.Appendix.A.0.2}{otuParser.py}{subsubsection.Appendix.A.0.1}% 121
+\BOOKMARK [3][-]{subsubsection.Appendix.A.0.3}{modelGeneratorTranslator.py}{subsubsection.Appendix.A.0.1}% 122
+\BOOKMARK [3][-]{subsubsection.Appendix.A.0.4}{ModelGenerator.py}{subsubsection.Appendix.A.0.1}% 123
+\BOOKMARK [3][-]{subsubsection.Appendix.A.0.5}{objModel.py}{subsubsection.Appendix.A.0.1}% 124
+\BOOKMARK [1][-]{section*.3}{Appendix: Additional Content}{}% 125

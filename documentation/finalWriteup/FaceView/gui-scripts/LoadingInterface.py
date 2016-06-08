@@ -1,24 +1,4 @@
-"""
-Qt GUI for the FaceView software
 
-"""
-
-from PyQt4 import QtGui, uic, QtCore
-import sys, os
-
-if __name__=="__main__":
-    os.chdir('..')
-    sys.path.append('./objViewer')
-
-import main as parent
-import fvParser
-import otuParser
-import modelGenerator as ModelGenerator
-import modelGeneratorTranslator
-
-import ThumbnailInterface
-
-# replace 'c:/test.ui' with real path to ui-file created in QtDesigner
 uifile = 'gui-scripts/loadingview.ui'
 form, base = uic.loadUiType(uifile)
 features = ModelGenerator.getFeatureList()
@@ -159,15 +139,3 @@ class loadingWindow(QtGui.QMainWindow):
 
     def loadThumbnail(self):
         ThumbnailInterface.thumbnailWindow(self.prog_vars, self).show()
-
-
-def main():
-    app = QtGui.QApplication(sys.argv)
-    myapp = loadingWindow()
-    myapp.show()
-    sys.exit(app.exec_())
-
-
-if __name__=="__main__":
-    main()
-

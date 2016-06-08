@@ -1,3 +1,0 @@
-BEGIN MODEL
-name:derp
-END MODEL

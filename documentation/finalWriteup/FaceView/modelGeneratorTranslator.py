@@ -1,6 +1,3 @@
-import os
-import sample
-
 #Normalizes values with respect to the largest population
 #	in the file.
 # It only considers a subset of the organisms for the scale, 

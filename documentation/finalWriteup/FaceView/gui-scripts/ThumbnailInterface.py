@@ -1,24 +1,3 @@
-"""
-Qt GUI for the FaceView software
-
-"""
-
-from PyQt4 import QtGui, uic, QtCore
-import sys
-import glob, os
-import math
-
-if __name__=="__main__":
-    os.chdir('..')
-
-import AnalysisInterface
-import LoadingInterface
-
-sys.path.append('./objViewer')
-
-import objWindow
-import objModel
-import grouping
 
 # replace 'c:/test.ui' with real path to ui-file created in QtDesigner
 uifile = 'gui-scripts/thumbnailview.ui'
@@ -199,17 +178,3 @@ class thumbnailWindow(QtGui.QMainWindow):
     def loadAnalysis(self, widgets):
         AnalysisInterface.analysisWindow(widgets, self.map, self).show()
         self.hide()
-        
-
-def main():
-    app = QtGui.QApplication(sys.argv)
-    myapp = thumbnailWindow(8, None)
-    myapp.show()
-    sys.exit(app.exec_())
-
-
-if __name__=="__main__":
-    
-    main()
-
-

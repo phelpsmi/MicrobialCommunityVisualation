@@ -1,16 +1,4 @@
-import OpenGL.GL as GL
-import OpenGL.GLU as GLU
-from PyQt4 import QtGui
-from PyQt4 import QtCore
-from PyQt4.QtOpenGL import *
-import numpy
-import os.path
-import math
 
-from ctypes import c_void_p
-
-#By Thomas Albertine
-#It should allow you to view obj files in a little window in your app.
 
 def genTranslationMatrix(x, y, z):
 	return numpy.matrix([
@@ -438,24 +426,6 @@ class ObjWidget(QGLWidget):
 	def setHighlighted(self, hl):
 		self.highlighted = hl
 		self.updateGL()
-				
-if __name__ == '__main__':
-	import objModel
-	import os
-	model = objModel.loadModel("../models/Sample 1.obj")
-	print model
-	#model = objModel.loadModel("objViewer/test.obj")
-	app = QtGui.QApplication(["Thomas' widget"])
-	widget = ObjWidget(model)
-	widget.resize(300, 300)
-	widget.highlight()
-	widget.show()
-	timer = QtCore.QTimer()
-	def timeout_func():
-		widget.relativeRotate(0, 0)
-	
-	timer.timeout.connect(timeout_func)
-	timer.start(16)
-	app.exec_()
+
 	
 	

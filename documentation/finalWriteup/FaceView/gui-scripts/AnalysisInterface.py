@@ -1,19 +1,3 @@
-"""
-Qt GUI for the FaceView software
-
-"""
-
-from PyQt4 import QtGui, uic, QtCore
-import sys, os, math
-
-if __name__=="__main__":
-    os.chdir('..')
-
-sys.path.append('./objViewer')
-
-import objWindow
-import objModel
-
 # replace 'c:/test.ui' with real path to ui-file created in QtDesigner
 uifile = './gui-scripts/analysisview.ui'
 form, base = uic.loadUiType(uifile)
@@ -92,22 +76,3 @@ class analysisWindow(QtGui.QMainWindow):
     def back(self):
         self.parent.show()
         self.close()
-        
-
-def main():
-    app = QtGui.QApplication(sys.argv)
-
-    model = objModel.ObjModel('../models/Sample 1.obj')
-    widget = objWindow.ObjWidget(model, True)
-    widget.show()
-
-    test_map = {"org1":"feature1", "org2":"feature2", "org3":"feature3"}
-    myapp = analysisWindow([widget], test_map)
-    myapp.show()
-    sys.exit(app.exec_())
-
-
-if __name__=="__main__":
-    main()
-
-

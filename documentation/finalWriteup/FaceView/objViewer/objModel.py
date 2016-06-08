@@ -1,13 +1,4 @@
-import OpenGL.GL as GL
-import OpenGL.GLU as GLU
-from PIL import Image #Module is actually called Pillow, not PIL
-import os
-import numpy
 
-#objModel.py
-#By Thomas Albertine
-#Parses obj files, but throws away unnecessary information.
-#Implements enough of the obj spec for our purposes.
 
 def chunks(l, n):
     """Yield successive n-sized chunks from l."""
@@ -302,17 +293,4 @@ def loadModel(filePath):
 		#Create a section object with this name, material, vertices, normals, texture coordinates, and indices, and stick it on the list of sections to return
 		retval.append(Section(i, parts[i][1], vs, vns, vts, indices))
 	return retval
-			
-if __name__ == "__main__":
-	#Do some testing/debugging stuff
-	path = "../../models/derp"
-	#path = "test"
-	test = loadModel(path + ".obj")
-	for i in test:
-		print i
-		raw_input("continue")
-	
-	
-				
-			
 			

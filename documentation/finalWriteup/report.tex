@@ -71,6 +71,8 @@
 \maketitle
 \section{Abstract}
 
+Our client requested that we create a tool to visualize microbial population data, which would help her in her research. To that end, we've created a tool that can load QIIME OTU files containing population data, represent the relationships in the data via a 3d model of a human, and display the model on the screen in such a way that the user can compare it with those of other samples. The ultimate goal is for this comparison to help the user find patterns that he or she would normally miss. Over the course of the project, we've gained technical skills, such as working with the Qt UI toolkit and the MakeHuman project, as well as non-technical skill such as reading code and working with a client.
+
 \clearpage
 
 \tableofcontents
@@ -781,7 +783,7 @@ The third normalization scheme is ``Manual'' in which you can set the normalizat
 
 Now that all of the optoins are configured, please click the generate button, and the application will generate 3d models of human faces that represent your data. It may take a moment, so please be patient.
 
-At this point, I'd like to point out that if you don't like your selection thus far, each page has a back button, which will allow you to return to hte previous page with all of your settings maintained, so you can easily modify the parameters to fit your needs.
+At this point, I'd like to point out that if you don't like your selection thus far, each page has a back button, which will allow you to return to the previous page with all of your settings maintained, so you can easily modify the parameters to fit your needs.
 
 By the time the next window appears, the models will have finished generating and loading, and should be visible on your screen. At this point you can select them manually by clicking on them, or you can use the buttons on the right to select them by groups. If you had groups in your metadata file, you should have some groups in the drop down by default. In any case, can use those buttons to create groups, and samples to a group, remove samples from a group, or delete groups entirely (don't worry, the samples will remain). Please select some samples, and then click the button labelled ``Analysis View''
 
@@ -798,17 +800,17 @@ This answer may be the most obvious, but it was exceptionally helpful. If I sear
 
 \subsubsection{Python Online Documentation}
 
-Since our project was written in Python, it's obvious that the Python documentation would be useful. Again, it was more of a general resources, but still provided enough depth to get some good information.
+Since our project was written in Python, it's obvious that the Python documentation would be useful. Again, it was more of a general resource, but still provided enough depth to get some good information.
 
 \url{https://docs.python.org/2.7/}
 
 \subsubsection{Qt 4.8 Documentation}
-As we mentioned, our application is written using the PyQt4, which is a Python wrapper around the Qt UI library. Since the naming conventions were the same, we were able to read the Qt documentation to find out about the corresponding functionality in PyQt, but the Qt documentation was searchable, and easier to read.
+As we mentioned, our application is written using the PyQt4, which is a Python wrapper around the Qt UI library. Since the naming conventions were the same, we were able to read the Qt documentation to find out about the corresponding functionality in PyQt. As a bonus, the Qt documentation was searchable and easier to read than the official PyQt documentation.
 
 \url{http://doc.qt.io/qt-4.8/}
 
 \subsubsection{opengl-tutorial.org}
-This site was a bit more specialized. It was a good refresher for how to work with OpenGL after not doing so for approximately a year. 
+This site was a bit more specialized. It was a good refresher for how to work with OpenGL after not doing so for nearly a year. 
 
 \url{http://www.opengl-tutorial.org/}
 
@@ -820,34 +822,63 @@ This is the web site for the program that first used QIIME format, which we supp
 \section{Personal Learning}
 \subsection{Thomas Albertine}
 \subsubsection{Technical Information}
-This project has been my first experience working with Qt. Admittedly, Michael did most of the UI work, but I had a hand in some of it as well. I did have some experience working with the Android SDK, which includes a UI framework, so I wasn't going in completely blind, but some featurea in Qt require the developer to implement them in code rather than in markup, so that threw a wrench in some of my plans. Besides that, all of the function and class names were different, but that goes without saying.
+This project has been my first experience working with Qt. Admittedly, Michael did most of the UI work, but I had a hand in some of it as well. I did have some experience working with the Android SDK, which includes a UI framework, so I wasn't going in completely blind, but some features in Qt work differently than in Android. Besides that, all of the function and class names were different than Android's, but that goes without saying.
 
-In the project, I had the opportunity to brush up on my OpenGL. As I mentioned before, it's been some time since I had a reason to do so, and I had forgotten how to set up vertex attribute arrays and element array buffers for example, even if I still remembered how they work conceptually. To tie this in with Qt, I had never done OpenGl with anything besides GlUT, so I also learned a bit about OpenGL contexts themselves and how to use the UI toolkit to get one.
+In the project, I had the opportunity to brush up on my OpenGL. As I mentioned before, it's been some time since I had a reason to do so, and I had forgotten how to set up vertex attribute arrays and element array buffers for example, even if I still remembered how they work conceptually. To tie this in with Qt, I had never done OpenGl with anything besides GLUT, so I also learned a bit about OpenGL contexts themselves and how to use the UI toolkit to get one.
 
 Additionally, I've had the opportunity to learn of a few more \LaTeX packages. PgfGantt in particular was very helpful during this writeup. 
 
 \subsubsection{Non-Technical Information}
-I think the non-technical skill that I improved the most during this project was my ability to read someone else's code. I had done it before (notably during Operating Systems 2 with the Linux kernel), but it was a drudgery and it took a long time to find anything. Perhaps it's the fact that the code for this project was in Python instead of C, but I didn't feel that is was as bad as before.
+I think the non-technical skill that I improved the most during this project was my ability to read someone else's code. I read other people's before (in particular, the Linux kernel in Operating Systems 2 and coworkers' code during my internship), but it was a drudgery and it took a long time to find anything. Perhaps it's the fact that the code for this project was in Python instead of C, but I didn't feel that is was as bad as before.
 
-Other than that, I learned a bit about what was required for the kinds of documentation that we wrote. I understand that I was supposed to have learned it in Software Engineering, but at the time, we were so swamped with the project, unrelated papers, and tests that the actual documentation that is typically the focus of the class fell by the wayside. For that reason, I'm glad that I was able to make up the difference in Senior Design.
+Other than that, I learned a bit about what was required for the kinds of documentation that we wrote. I understand that I was supposed to have learned that in Software Engineering, but at the time, we were so swamped with the project, unrelated papers, and tests that the actual documentation that is typically the focus of the class fell by the wayside. For that reason, I'm glad that I was able to make up the difference in Senior Design.
 
 I also got more experience in actually designing the project. Again this sounds like a Software Engineering topic, but in my class, only the three team leads got that opportunity. In Senior Design however, I personally had a lot more freedom with how the project worked, so I actually got to put the various design patterns into practice.
 
 \subsubsection{Regarding Project Work}
-Aside from where it intersects with the other categories, I don't think I've learned that much about project work itself in Senior Design. I don't fault the class, the format, or the instructor for that. I've just had a large number of projects in various other classes and in internships. That's not to say that I think I've learned everything I can from doing projects. It's just that I think, within the category project work alone, I don't think Senior Design is significantly different from what I've already done.
+Aside from where it intersects with the other categories, I don't think I've learned that much about project work itself in Senior Design. I don't fault the class, the format, or the instructor for that. I've just had a large number of projects in various other classes and in internships. That's not to say that I think I've learned everything I can from doing projects. It's just that, within the category project work alone, I don't think Senior Design is significantly different from what I've already done, except for the scale.
 
 \subsubsection{Regarding Project Management}
-The most important thing I learned about project management was how big a difference the client makes. I understand that as a developer, I won't always be able to pick which clients I work with, but I attribute a large part of our project's success to our client. We had a meeting in which we discussed requirements, which she provided. We wrote up a document for them. She suggested one more, but didn't require us to change them halfway through the year, and she was very understanding when some requirements needed to be adjusted for technical reasons. I attribute a large part of our success to our client's benevolence, especially considering some of the stories I've heard about other clients.
+The most important thing I learned about project management was how big a difference the client makes. I understand that as a developer, I won't always be able to pick which clients I work with, but I attribute a large part of our project's success to our client. We had a meeting in which we discussed requirements, which she provided. We wrote up a requirements document and althoguh She suggested one more at the time, she didn't change them at all throughout the year, and she was very understanding when some requirements needed to be adjusted for technical reasons. I attribute a large part of our success to our client's benevolence, especially considering some of the stories I've heard about other clients.
 
 \subsubsection{Regarding Working in Teams}
-The main thing I learned is that it's important to keep all the team members on the same page. The first time we had a discrepency regarding that caused me to panic and take over one of Michael's tasks. The second time led to us submitting the wrong version of one of the writeups. It doesn't really matter who's fault it is, because when comunication breaks down, we both get egg on our face. It's even more true when there's only two of us.
+The main thing I learned is that it's important to keep all the team members on the same page. The first time we had a discrepency regarding that caused me to panic and take over one of Michael's tasks. The second time led to us submitting the wrong version of one of the writeups. It doesn't really matter who's fault it is, because when comunication breaks down, it looks bad for both of us.
 
 \subsubsection{What I Would Do Differently, If I Did It Again}
-As I mentioned before, I think this project went surprisingly well. That said, there are a few places where we could have done better. As I also mentioned before, our communication was generally very good, but there were two major breaks in communication, that I would avoid were I to try again.
+As I mentioned before, I think this project went surprisingly well. That said, there are a few places where we could have done better. As I also mentioned before, our communication was generally very good, but there were two major breaks in communication, that I would avoid were I to try again. 
+
+There were, of course, things that were out of our hands. For example, in the original requirements document, we told our client that we could support 150 facial features, but we didn't yet know how to use MakeHuman to generate models, so we had to do so with the understanding that this number may have to change. When we found out, we spoke with our client and changed it to 138 features instead. That said, in an ideal world, I would have had time to figure out a more accurate number.
 
 \subsection{Michael Phelps}
 
 \appendix[Essential Code Listings]
+The following is an edited version of our code, removing uninteresting code (imports, tests, some functionality, etc.). The full code is available from our Github repository at \url{https://github.com/phelpsmi/MicrobialCommunityVisualation}.
+
+\subsubsection{fvParser.py}
+fvParser.py contains the parser registry, which works by associating each individual parser object with a file extension. When the file extension is provided, the registry knows which object to use, and we can extend the functionality by creating more parser objects.
+
+\lstinputlisting{FaceView/fvParser.py}
+
+\subsubsection{otuParser.py}
+otuParser.py contains the parser object for the QIIME classic OTU format. It is an example of how a parser object can work.
+
+\lstinputlisting{FaceView/otuParser.py}
+
+\subsubsection{modelGeneratorTranslator.py}
+modelGeneratorTranslator.py includes only the three functions for normalizing data. 
+
+\lstinputlisting{FaceView/modelGeneratorTranslator.py}
+
+\subsubsection{ModelGenerator.py}
+This file includes functionality to invoke MakeHuman in order to either request a list of model parameters or to generate models themselves. If run by itself, this file becomes the application that generates the models. Otherwise, it is the library that invokes itself using the subprocess module. 
+
+\lstinputlisting{FaceView/ModelGenerator.py}
+
+\subsubsection{objModel.py}
+This file contains the obj loading and mtl loading functionality. It supports a large part of the Wavefront obj specification. Specifically, it supports the features that MakeHuman uses in its generated obj files.
+
+\lstinputlisting{FaceView/objviewer/objModel.py}
+
 
 \appendix[Additional Content]
 
