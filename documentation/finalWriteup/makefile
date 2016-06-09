@@ -14,3 +14,4 @@ clean:
 	-@rm -f *.log
 	-@rm -f *.pdf
 	-@rm -f *.toc
+	-@rm -f *.out

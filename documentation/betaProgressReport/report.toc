@@ -8,13 +8,13 @@
 \contentsline {section}{\numberline {VI}Interesting Code}{7}
 \contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-A}}fvParser}{7}
 \contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-B}}objWidget}{8}
-\contentsline {section}{\numberline {VII}User Study}{16}
-\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-A}}Users}{16}
-\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-B}}Methods}{16}
-\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-C}}Tasks}{17}
-\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}}Results}{17}
-\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}1}Subject 1}{17}
-\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}2}Subject 2}{17}
-\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}3}Subject 3}{17}
-\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}4}Subject 4}{18}
-\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}5}Subject 5}{18}
+\contentsline {section}{\numberline {VII}User Study}{19}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-A}}Users}{19}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-B}}Methods}{19}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-C}}Tasks}{19}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}}Results}{19}
+\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}1}Subject 1}{20}
+\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}2}Subject 2}{20}
+\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}3}Subject 3}{20}
+\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}4}Subject 4}{20}
+\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}5}Subject 5}{21}
