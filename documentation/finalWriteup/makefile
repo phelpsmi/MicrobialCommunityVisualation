@@ -1,10 +1,13 @@
+CC=/usr/local/apps/tex_live/current/bin/x86_64-linux/pdflatex
 
 
 default: pdf
 
-pdf: analysis.PNG Comparison.PNG loading.PNG report.tex
-	pdflatex report.tex
-	pdflatex report.tex
+
+
+pdf: report.tex
+	$(CC) report.tex
+	$(CC) report.tex
 
 clean:
 	-@rm -f *.aux
