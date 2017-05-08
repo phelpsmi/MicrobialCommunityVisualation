@@ -13,7 +13,8 @@ Python 2.7 must be installed. (Python 3 will not work)
 From the repository run:
 `python code/FaceView/main.py`
 
-You will microbial sample data in the `.otu` file format along with a `.csv` metadata file.
+You will need microbial sample data in the `.otu` file format along with a `.csv` metadata file.
+For testing purposes, sample files can be found in the `code/FaceView/` directory.
 Further instructions on use can be found in the documentation folder.
 
 ## Credits
