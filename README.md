@@ -19,4 +19,11 @@ Further instructions on use can be found in the documentation folder.
 
 ## Credits
 
-TODO: Write credits
+Michael Phelps:
+  Primary Author
+Thomas Albertine:
+  Primary Author
+Jenna Morgan Lang:
+  Academic Sponser, UC Davis
+Kevin McGrath:
+  Professor, Oregon State University
